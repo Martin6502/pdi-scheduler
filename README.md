@@ -21,4 +21,5 @@ The application is developed with CUBA.platform framework ( https://github.com/c
 and uses internally the Quartz Job Scheduler ( http://www.quartz-scheduler.org/ ) 
 and also a PostgreSQL DB ( https://www.postgresql.org/ )
 
-More info will follow shortly.
+
+For Installation of PDI Scheduler please have look [here](doc/INSTALL.md)

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.mschneider.pdischeduler.web.taskrun.TaskRunList"
+        focusComponent="taskRunsTable"
+        lookupComponent="taskRunsTable"
+        messagesPack="com.mschneider.pdischeduler.web.taskrun">
+    <dsContext>
+        <collectionDatasource id="taskRunsDs"
+                              allowCommit="false"
+                              class="com.mschneider.pdischeduler.entity.TaskRun"
+                              view="taskRun-view">
+            <query>
+                <![CDATA[select e from pdischeduler$TaskRun e
+where e.task.id = :param$currTask
+order by e.startTime desc]]>
+            </query>
+        </collectionDatasource>
+        <datasource id="taskDs"
+                    allowCommit="false"
+                    class="com.mschneider.pdischeduler.entity.Task"
+                    view="task-view"/>
+    </dsContext>
+    <timers>
+        <timer autostart="true"
+               delay="60000"
+               onTimer="refreshDsByTimer"
+               repeating="true"/>
+    </timers>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="taskRunsTable"
+            spacing="true">
+        <label id="headline"
+               stylename="bold"/>
+        <filter id="filter"
+                applyTo="taskRunsTable"
+                datasource="taskRunsDs">
+            <properties include="(startTime|stopTime|durationSec|logText|resultCode|resultHTML|startTrigger|status)"/>
+        </filter>
+        <table id="taskRunsTable"
+               width="100%">
+            <actions>
+                <action id="display"/>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="startTime"/>
+                <column id="stopTime"/>
+                <column id="durationSec"/>
+                <column id="startTrigger"/>
+                <column id="status"/>
+                <column id="resultCode"/>
+            </columns>
+            <rows datasource="taskRunsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="displayBtn"
+                        action="taskRunsTable.display"
+                        caption="msg://displayCaption"
+                        icon="EYE"/>
+                <button id="taskDisplayBtn"
+                        action="taskRunsTable.taskdisplay"
+                        caption="msg://taskDisplayCaption"
+                        icon="EYE"/>
+                <button id="refreshBtn"
+                        caption="msg://refreshCaption"
+                        invoke="onRefreshBtnClick"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

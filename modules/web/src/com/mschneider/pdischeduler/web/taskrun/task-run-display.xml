@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.mschneider.pdischeduler.web.taskrun.TaskRunDisplay"
+        datasource="taskRunDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.mschneider.pdischeduler.web.taskrun">
+    <dsContext>
+        <datasource id="taskRunDs"
+                    allowCommit="false"
+                    class="com.mschneider.pdischeduler.entity.TaskRun"
+                    view="taskRun-view"/>
+    </dsContext>
+    <dialogMode forceDialog="true"
+                height="AUTO"
+                width="600"/>
+    <layout expand="buttonBox"
+            spacing="true">
+        <label id="headline"/>
+        <fieldGroup id="fieldGroup"
+                    datasource="taskRunDs"
+                    editable="false"
+                    width="100%">
+            <column width="100%">
+                <field datasource="taskRunDs"
+                       editable="false"
+                       generator="generateStartTimeField"
+                       property="startTime"/>
+                <field editable="false"
+                       generator="generateStopTimeField"
+                       property="stopTime"/>
+                <field editable="false"
+                       property="durationSec"/>
+                <field editable="false"
+                       property="startTrigger"/>
+                <field editable="false"
+                       property="status"/>
+                <field editable="false"
+                       property="resultCode"/>
+            </column>
+        </fieldGroup>
+        <label id="headline2"/>
+        <textArea id="logText"
+                  caption="msg://logText"
+                  datasource="taskRunDs"
+                  editable="false"
+                  height="100px"
+                  property="logText"
+                  width="100%"/>
+        <browserFrame id="resultHTML"
+                  caption="msg://resultHTML"
+                  height="100px"
+                  width="100%"/>
+        <hbox id="buttonBox"
+              spacing="true">
+            <button id="closeBtn"
+                    caption="msg://closeButtonCaption"
+                    invoke="onCloseBtnClick"/>
+        </hbox>
+    </layout>
+</window>

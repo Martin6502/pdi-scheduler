@@ -1,0 +1,1 @@
+create unique index IDX_PDISCHEDULER_TASK_UNQ on PDISCHEDULER_TASK (PROJECT_ID, NAME) where DELETE_TS is null ;

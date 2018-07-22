@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://monitorCaption"
+        class="com.mschneider.pdischeduler.web.task.TaskMonitor"
+        focusComponent="tasksTable"
+        lookupComponent="tasksTable"
+        messagesPack="com.mschneider.pdischeduler.web.task">
+    <dsContext>
+        <collectionDatasource id="currProjectTasksDs"
+                              allowCommit="false"
+                              class="com.mschneider.pdischeduler.entity.Task"
+                              view="task-view">
+            <query>
+                <![CDATA[select e from pdischeduler$Task e
+where e.project.id = :param$currProject and e.active = 1 and e.project.active = 1 and e.project.worker.active = 1
+order by e.sortKey, e.name]]>
+            </query>
+        </collectionDatasource>
+        <datasource id="currProjectDs"
+                    allowCommit="false"
+                    class="com.mschneider.pdischeduler.entity.Project"
+                    view="project-view"/>
+    </dsContext>
+    <timers>
+        <timer autostart="true"
+               delay="60000"
+               onTimer="refreshDsByTimer"
+               repeating="true"/>
+    </timers>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tasksTable"
+            spacing="true">
+        <label id="headline"
+               stylename="bold"/>
+        <hbox spacing="true"
+              visible="false">
+            <textField id="projectName"
+                       caption="Project name"
+                       datasource="currProjectDs"
+                       datatype="string"
+                       editable="false"
+                       property="name"/>
+            <textField id="projectTimezone"
+                       caption="Project timezone"
+                       datasource="currProjectDs"
+                       datatype="string"
+                       editable="false"
+                       property="timezone"/>
+        </hbox>
+        <table id="tasksTable"
+               editable="true"
+               width="100%">
+            <actions>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="sortKey"/>
+                <column id="name"/>
+                <column id="triggerType"/>
+                <column id="cronSpec"/>
+                <column id="cronExclDates"
+                        maxTextLength="12"/>
+                <column id="prevTask"/>
+                <column id="nextRun"
+                        caption="msg://nextRun"
+                        generator="generateNextRunCell"/>
+                <column id="ltrStartTrigger"
+                        caption="msg://ltrStartTrigger"
+                        generator="generateLtrStartTriggerCell"/>
+                <column id="ltrStartTime"
+                        caption="msg://ltrStartTime"
+                        generator="generateLtrStartTimeCell"/>
+                <column id="ltrStopTime"
+                        caption="msg://ltrStopTime"
+                        generator="generateLtrStopTimeCell"/>
+                <column id="ltrDurationSec"
+                        caption="msg://ltrDurationSec"
+                        generator="generateLtrDurationSecCell"/>
+                <column id="ltrStatus"
+                        caption="msg://ltrStatus"
+                        generator="generateLtrStatusCell"/>
+                <column id="ltrResultCode"
+                        caption="msg://ltrResultCode"
+                        generator="generateLtrResultCodeCell"/>
+                <column id="ltrLogText"
+                        caption="msg://ltrLogText"
+                        generator="generateLtrLogTextCell"
+                        maxTextLength="20"
+                        visible="false"/>
+                <column id="ltrResultText"
+                        caption="msg://ltrResultText"
+                        generator="generateLtrResultTextCell"
+                        visible="false"/>
+            </columns>
+            <rows datasource="currProjectTasksDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="taskrunBtn"
+                        action="tasksTable.taskrun"
+                        caption="msg://taskrunCaption"
+                        icon="LIST"/>
+                <button id="displayBtn"
+                        action="tasksTable.display"
+                        caption="msg://displayCaption"
+                        icon="EYE"/>
+                <button id="execSingleBtn"
+                        action="tasksTable.execSingle"
+                        caption="msg://execSingleCaption"
+                        icon="ANGLE_RIGHT"/>
+                <button id="execSequenceBtn"
+                        action="tasksTable.execSequence"
+                        caption="msg://execSequenceCaption"
+                        icon="ANGLE_DOUBLE_RIGHT"/>
+                <button id="refreshBtn"
+                        caption="msg://refreshCaption"
+                        invoke="onRefreshBtnClick"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

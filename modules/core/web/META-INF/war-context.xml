@@ -1,0 +1,14 @@
+<Context>
+    <!-- Database connection -->
+    <Resource driverClassName="org.postgresql.Driver"
+              maxIdle="2"
+              maxTotal="20"
+              maxWaitMillis="5000"
+              name="jdbc/CubaDS"
+              password="${pg.pass}"
+              type="javax.sql.DataSource"
+              url="${pg.url}"
+              username="${pg.user}"/>
+    <!-- Switch off session serialization -->
+    <Manager pathname=""/>
+</Context>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="pdischeduler-global"/>
+        <property name="cuba.persistenceConfig"
+                  value="+com/mschneider/pdischeduler/persistence.xml"/>
+        <property name="cuba.metadataConfig"
+                  value="+com/mschneider/pdischeduler/metadata.xml"/>
+        <property name="cuba.viewsConfig"
+                  value="+com/mschneider/pdischeduler/views.xml"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="pdischeduler-core"/>
+        <artifact classifier="db"
+                  configuration="dbscripts"
+                  ext="zip"
+                  name="pdischeduler-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/mschneider/pdischeduler/spring.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.mschneider.pdischeduler.core"/>
+    </module>
+    <module blocks="web,desktop"
+            dependsOn="global"
+            name="gui">
+        <artifact appJar="true"
+                  name="pdischeduler-gui"/>
+    </module>
+    <module blocks="web"
+            dependsOn="gui"
+            name="web">
+        <artifact appJar="true"
+                  name="pdischeduler-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="pdischeduler-web"/>
+        <artifact configuration="themes"
+                  name="pdischeduler-web-themes"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/mschneider/pdischeduler/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig"
+                  value="+com/mschneider/pdischeduler/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig"
+                  value="+com/mschneider/pdischeduler/web-screens.xml"/>
+        <property name="cuba.menuConfig"
+                  value="+com/mschneider/pdischeduler/web-menu.xml"/>
+        <property name="cuba.permissionConfig"
+                  value="+com/mschneider/pdischeduler/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.mschneider.pdischeduler.web"/>
+    </module>
+    <module name="web-themes">
+        <artifact name="pdischeduler-web-themes"/>
+    </module>
+</app-component>

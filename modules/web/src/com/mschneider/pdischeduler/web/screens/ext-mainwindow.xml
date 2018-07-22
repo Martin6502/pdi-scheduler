@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.mschneider.pdischeduler.web.screens.ExtAppMainWindow"
+        extends="/com/haulmont/cuba/web/app/mainwindow/mainwindow.xml"
+        messagesPack="com.mschneider.pdischeduler.web.screens"
+        xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <hbox id="titleBar">
+            <main:ftsField id="ftsField"
+                           enable="false"
+                           visible="false"/>
+            <main:timeZoneIndicator id="timeZoneIndicator"
+                                    enable="false"
+                                    visible="false"/>
+        </hbox>
+    </layout>
+</window>

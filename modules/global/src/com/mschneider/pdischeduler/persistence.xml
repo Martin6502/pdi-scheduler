@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="2.0">
+    <persistence-unit name="PDI_Scheduler"
+                      transaction-type="RESOURCE_LOCAL">
+        <class>com.mschneider.pdischeduler.entity.Worker</class>
+        <class>com.mschneider.pdischeduler.entity.Project</class>
+        <class>com.mschneider.pdischeduler.entity.Task</class>
+        <class>com.mschneider.pdischeduler.entity.TaskRun</class>
+    </persistence-unit>
+</persistence>

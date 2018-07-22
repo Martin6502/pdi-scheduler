@@ -1,0 +1,1 @@
+drop index IDX_PDISCHEDULER_WORKER_UK_NAME ;

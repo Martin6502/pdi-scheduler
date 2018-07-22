@@ -1,0 +1,1 @@
+create unique index IDX_PDISCHEDULER_WORKER_UK_NAME on PDISCHEDULER_WORKER (NAME) where DELETE_TS is null ;

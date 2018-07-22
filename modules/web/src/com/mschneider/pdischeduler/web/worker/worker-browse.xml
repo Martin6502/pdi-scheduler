@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.mschneider.pdischeduler.web.worker.WorkerBrowse"
+        focusComponent="workersTable"
+        lookupComponent="workersTable"
+        messagesPack="com.mschneider.pdischeduler.web.worker">
+    <dsContext>
+        <collectionDatasource id="workersDs"
+                              class="com.mschneider.pdischeduler.entity.Worker"
+                              view="worker-view">
+            <query>
+                <![CDATA[select e from pdischeduler$Worker e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="workersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="workersTable"
+                datasource="workersDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="workersTable"
+               multiselect="true"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="description"/>
+                <column id="url"/>
+                <column id="timezone"/>
+                <column id="active"/>
+            </columns>
+            <rows datasource="workersDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="workersTable.create"/>
+                <button id="editBtn"
+                        action="workersTable.edit"/>
+                <button id="copyBtn"
+                        action="workersTable.copy"
+                        caption="msg://copyCaption"
+                        icon="COPY"/>
+                <button id="removeBtn"
+                        action="workersTable.remove"/>
+                <button id="refreshBtn"
+                        action="workersTable.refresh"/>
+                <button id="exportCsvBtn"
+                        action="workersTable.exportCsv"
+                        caption="msg://exportCsvCaption"
+                        icon="DOWNLOAD"/>
+                <upload id="importCsvUpload"
+                        uploadButtonCaption="msg://importCsvCaption"
+                        uploadButtonIcon="UPLOAD"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

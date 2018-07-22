@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://listCaption"
+        class="com.mschneider.pdischeduler.web.project.ProjectList"
+        focusComponent="projectListTable"
+        lookupComponent="projectListTable"
+        messagesPack="com.mschneider.pdischeduler.web.project">
+    <dsContext>
+        <collectionDatasource id="projectlistDs"
+                         allowCommit="false"
+                         class="com.mschneider.pdischeduler.entity.Project"
+                         view="project-view">
+            <query>
+                <![CDATA[select e from pdischeduler$Project e
+where e.active = TRUE and e.worker.active = TRUE order by e.name]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="projectListTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="projectListTable"
+                datasource="projectlistDs">
+            <properties include="(name|description)"/>
+        </filter>
+        <table id="projectListTable"
+               width="100%">
+            <actions>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="description"
+                        maxTextLength="40"/>
+                <column id="timezone"/>
+            </columns>
+            <rows datasource="projectlistDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="taskmonitorBtn"
+                        action="projectListTable.taskmonitor"
+                        caption="msg://taskmonitorCaption"
+                        icon="BULK_EDIT_ACTION"/>
+                <button id="taskbrowseBtn"
+                        action="projectListTable.taskbrowse"
+                        caption="msg://taskbrowseCaption"
+                        icon="EDIT_ACTION"/>
+                <button id="taskrunmonitorBtn"
+                        action="projectListTable.taskrunmonitor"
+                        caption="msg://taskrunmonitorCaption"
+                        icon="LIST"/>
+                <button id="projectDisplayBtn"
+                        action="projectListTable.projectdisplay"
+                        caption="msg://projectDisplayCaption"
+                        icon="EYE"/>
+                <button id="refreshButton"
+                        action="projectListTable.refresh"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

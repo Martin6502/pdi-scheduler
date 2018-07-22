@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.mschneider.pdischeduler.web.project.ProjectEdit"
+        datasource="projectDs"
+        messagesPack="com.mschneider.pdischeduler.web.project">
+    <dsContext>
+        <datasource id="projectDs"
+                    class="com.mschneider.pdischeduler.entity.Project"
+                    view="project-view"/>
+        <collectionDatasource id="workerSelectDs"
+                              class="com.mschneider.pdischeduler.entity.Worker"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from pdischeduler$Worker e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox height="100%">
+            <vbox margin="true"
+                  spacing="true">
+                <textField id="name"
+                           caption="Project name"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="name"
+                           required="true"
+                           width="100%"/>
+                <textArea id="description"
+                          caption="Project description"
+                          datasource="projectDs"
+                          property="description"
+                          rows="3"
+                          width="100%"/>
+                <textField id="pdiSubDir"
+                           caption="msg://pdiSubDir"
+                           contextHelpText="msg://pdiSubDirDesc"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="pdiSubDir"
+                           width="100%"/>
+                <textField id="pdiParameter"
+                           caption="msg://pdiParameter"
+                           contextHelpText="msg://pdiParameterDesc"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="pdiParameter"
+                           width="100%"/>
+                <textField id="groupAccess"
+                           caption="Access group"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="groupAccess"
+                           required="true"
+                           width="100%"/>
+                <lookupPickerField caption="Assigned Worker"
+                                   datasource="projectDs"
+                                   optionsDatasource="workerSelectDs"
+                                   property="worker"
+                                   required="true"
+                                   width="400px"/>
+                <lookupField id="timezoneLookup"
+                             caption="Project timezone"
+                             datasource="projectDs"
+                             property="timezone"
+                             required="true"
+                             width="400px"/>
+                <textField id="mailReceiverInfo"
+                           caption="EMail receiver for success"
+                           contextHelpText="msg://mailReceiverInfoDesc"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="mailReceiverInfo"
+                           width="100%"/>
+                <textField id="mailReceiverError"
+                           caption="EMail receiver for error"
+                           contextHelpText="msg://mailReceiverErrorDesc"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="mailReceiverError"
+                           width="100%"/>
+                <textField id="cleanupAfterDays"
+                           caption="Cleanup Results after days"
+                           datasource="projectDs"
+                           datatype="int"
+                           property="cleanupAfterDays"
+                           width="100%"/>
+                <checkBox id="active"
+                          caption="Active "
+                          datasource="projectDs"
+                          property="active"/>
+                <frame id="windowActions"
+                       screen="editWindowActions"/>
+            </vbox>
+        </scrollBox>
+    </layout>
+</window>

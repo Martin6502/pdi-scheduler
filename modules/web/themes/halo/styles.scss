@@ -1,0 +1,11 @@
+@import "halo-defaults";
+@import "com.mschneider.pdischeduler/halo-ext-defaults";
+@import "app-components";
+@import "com.mschneider.pdischeduler/halo-ext";
+
+.halo {
+  // include auto-generated app components SCSS
+  @include app_components;
+  
+  @include com_mschneider_pdischeduler-halo-ext;
+}

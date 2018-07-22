@@ -1,0 +1,14 @@
+<Context>
+    <!-- Database connection -->
+    <Resource driverClassName="org.postgresql.Driver"
+              maxIdle="2"
+              maxTotal="20"
+              maxWaitMillis="5000"
+              name="jdbc/CubaDS"
+              password="rGocP6w8VJk7fqRfMsM9"
+              type="javax.sql.DataSource"
+              url="jdbc:postgresql://192.168.66.80/pdischeduler?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
+              username="pdischeduler"/>
+    <!-- Switch off session serialization -->
+    <Manager pathname=""/>
+</Context>

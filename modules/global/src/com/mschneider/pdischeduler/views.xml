@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.mschneider.pdischeduler.entity.Worker"
+          extends="_minimal"
+          name="worker-view">
+        <property name="url"/>
+        <property name="timezone"/>
+        <property name="dataRootDir"/>
+        <property name="workerType"/>
+        <property name="active"/>
+        <property name="description"/>
+        <property name="userid"/>
+        <property name="password"/>
+        <property name="passwordEncr"/>
+        <property name="pdiRootDir"/>
+        <property name="pdiReposId"/>
+        <property name="pdiReposUser"/>
+        <property name="pdiReposPassword"/>
+        <property name="pdiReposPasswordEncr"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Project"
+          extends="_local"
+          name="project-view">
+        <property name="worker"
+                  view="_minimal">
+            <property name="timezone"/>
+            <property name="url"/>
+            <property name="dataRootDir"/>
+            <property name="workerType"/>
+            <property name="pdiRootDir"/>
+        </property>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Task"
+          extends="_local"
+          name="task-view">
+        <property name="project"
+                  view="_minimal">
+            <property name="timezone"/>
+        </property>
+        <property name="prevTask"
+                  view="_minimal"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Task"
+          extends="_local"
+          name="task-view-extended">
+        <property name="project"
+                  view="_minimal">
+            <property name="timezone"/>
+            <property name="active"/>
+        </property>
+        <property name="prevTask"
+                  view="_minimal">
+            <property name="active"/>
+        </property>
+        <property name="lastTaskRun"
+                  view="_minimal">
+            <property name="status"/>
+            <property name="startTrigger"/>
+            <property name="startTime"/>
+            <property name="stopTime"/>
+            <property name="durationSec"/>
+            <property name="logText"/>
+            <property name="resultCode"/>
+            <property name="resultHTML"/>
+        </property>
+        <property name="nextRun"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.TaskRun"
+          extends="_local"
+          name="taskRun-view">
+        <property name="task"
+                  view="_minimal"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Project"
+          extends="_local"
+          name="project-export">
+        <property name="worker"
+                  view="_minimal"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Worker"
+          name="worker-export">
+        <property name="description"/>
+        <property name="active"/>
+        <property name="url"/>
+        <property name="userid"/>
+        <property name="passwordEncr"/>
+        <property name="timezone"/>
+        <property name="dataRootDir"/>
+        <property name="workerType"/>
+        <property name="pdiRootDir"/>
+        <property name="pdiReposId"/>
+        <property name="pdiReposUser"/>
+        <property name="pdiReposPasswordEncr"/>
+        <property name="name"/>
+    </view>
+    <view class="com.mschneider.pdischeduler.entity.Task"
+          extends="_local"
+          name="task-export">
+        <property name="prevTask"
+                  view="_minimal"/>
+    </view>
+</views>

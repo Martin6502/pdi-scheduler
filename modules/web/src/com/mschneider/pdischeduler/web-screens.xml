@@ -29,4 +29,6 @@
             template="com/mschneider/pdischeduler/web/project/project-display.xml"/>
     <screen id="pdischeduler$Task.display"
             template="com/mschneider/pdischeduler/web/task/task-display.xml"/>
+    <screen id="aboutWindow"
+            template="com/mschneider/pdischeduler/web/screens/ext-about-window.xml"/>
 </screen-config>

@@ -89,7 +89,6 @@ public class TaskServiceBean implements TaskService {
         try {
             Date currTime = TimeZoneUtils.dateNow(timezone);
             CronExpression expr = new CronExpression(cronSpec);
-            expr.setTimeZone(TimeZone.getTimeZone(timezone));
             Date nextFireAt = expr.getNextValidTimeAfter(currTime);
             int maxCount = 1000;
             while (DateExclude.checkExcluded(nextFireAt, cronExclDates) && maxCount > 0) {

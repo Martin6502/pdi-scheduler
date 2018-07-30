@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.mschneider.pdischeduler.web.screens.ExtAboutWindow"
+        extends="/com/haulmont/cuba/gui/app/core/about/about-window.xml"
+        messagesPack="com.mschneider.pdischeduler.web.screens"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd">
+    <layout>
+        <tabSheet id="mainTabSheet">
+            <tab id="about"
+                 caption="about"
+                 ext:index="0"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <label id="main"
+                       htmlEnabled="true"
+                       value="msg://pdischeduler.about"/>
+            </tab>
+            <tab id="buildInfoTab">
+                <table id="buildInfoTable"
+                       height="100%"/>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

@@ -23,3 +23,6 @@ and also a PostgreSQL DB ( https://www.postgresql.org/ )
 
 
 For Installation of PDI Scheduler please have look [here](doc/INSTALL.md)
+
+After Installation you may start with an example [here](doc/EXAMPLE.md)
+

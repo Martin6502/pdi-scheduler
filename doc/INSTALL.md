@@ -63,7 +63,7 @@ After installation you have to set Postgres DB credentials during startup
          #
          # Within pdischeduler.war a generic context.xml is packaged which contains variables for Postgres DB connection:
          # Please set for your needs
-         export CATALINA_OPTS="$CATALINA_OPTS -Dpg.url='jdbc:postgresql://<servername>/<username>?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory' -Dpg.user=<username> -Dpg.pass=<password>"
+         export CATALINA_OPTS="$CATALINA_OPTS -Dpg.url='jdbc:postgresql://<servername>/<username>?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory' -Dpg.user=<username> -Dpg.pass=<password>"
 
 Now copy war file to webapps
 
@@ -85,7 +85,7 @@ After startup the application should be available at
 
 For first login use user "admin" with password "admin". Please change this!
 
-### Configuration from inside the application
+### Base Configuration from inside the application
 
 Now you have to configure the "Application Properties" from "Administration" Menu.
 You have to set SMTP credentials to allow email sending for protocols:
@@ -113,6 +113,9 @@ Save it and after this Activate the Task.
 
 ![Scheduled Tasks](002_scheduled_tasks.png "Scheduled Tasks")
 
+
+## Role and Group initialization 
+
 At "Administration" -> "Roles" Menu you should import the InitialRoles.json from install directory.
 These roles may be assigned to users later to restrict access level.
 
@@ -121,5 +124,20 @@ These roles may be assigned to users later to restrict access level.
 
 There is also a InitialGroups.json example file which may be imported at "Administration" -> "Groups".
 This creates a sample PGROUP group which can be assigned to user for restrict access to specific projects.
-
+Within Constraint - Where Clause you check project.groupAccess with specific specified value.
+ 
 ![Groups](004_groups.png "Groups")
+
+
+## Add some test user with restricted rights. 
+
+![Test User](050_testuser.png "Test User")
+
+![Test User 1](051_testuser.png "Test User 1")
+
+![Test User 2](052_testuser.png "Test User 2")
+
+![Test User 3](053_testuser.png "Test User 3")
+
+
+Now you may start with an example [here](EXAMPLE.md)

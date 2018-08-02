@@ -97,7 +97,7 @@ where e.project.id = :param$currProject]]>
                       spacing="true">
                     <textField id="cronspec"
                                caption="Cron specification"
-                               contextHelpText="sec min hour dayOfMonth month dayOfWeek [year]"
+                               contextHelpText="msg://cronspecCaption"
                                datasource="taskDs"
                                datatype="string"
                                property="cronSpec"
@@ -106,7 +106,7 @@ where e.project.id = :param$currProject]]>
                     </textField>
                     <textField id="cronexcldates"
                                caption="Cron exclude dates"
-                               contextHelpText="YYYY-MM-DD, YYYY-MM-DD:YYYY-MM-DD, ..."
+                               contextHelpText="msg://cronexcldatesCaption"
                                datasource="taskDs"
                                datatype="string"
                                property="cronExclDates"

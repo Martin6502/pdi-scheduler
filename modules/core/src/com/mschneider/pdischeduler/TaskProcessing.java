@@ -98,7 +98,9 @@ public class TaskProcessing {
                             jobDir,
                             task.getPdiFile());
                     String logLevel = task.getLogLevel();
-                    String dataDir = task.getProject().getWorker().getDataRootDir();
+                    String dataDir = CarteCommand.createFullPath(
+                            task.getProject().getWorker().getDataRootDir(),
+                            task.getProject().getPdiSubDir());
                     String reposId = task.getProject().getWorker().getPdiReposId();
                     String reposUser = task.getProject().getWorker().getPdiReposUser();
                     String reposPassword = task.getProject().getWorker().getPdiReposPassword();
@@ -123,7 +125,7 @@ public class TaskProcessing {
                     HashMap<String, String> map;
 
                     if (task.getProject().getWorker().getWorkerType() == WorkerType.PdiFile) {
-                        map = CarteCommand.jobExec(user, pass, baseUrl, jobFullPath, logLevel, dataDir, jobParam);
+                        map = CarteCommand.jobExec(user, pass, baseUrl, jobFullPath, logLevel, jobDir, dataDir, jobParam);
                     } else {
                         map = CarteCommand.jobExecRepos(user, pass, baseUrl, reposId, reposUser, reposPassword, jobFullPath, logLevel, dataDir, jobParam);
                     }

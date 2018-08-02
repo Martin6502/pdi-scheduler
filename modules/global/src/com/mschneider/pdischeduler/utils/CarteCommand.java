@@ -154,9 +154,9 @@ public class CarteCommand {
         return runCarteCommand(carteUser, cartePassword, urlString, urlParameter);
     }
 
-    public static HashMap<String, String> jobExec(String carteUser, String cartePassword, String carteBaseUrl, String jobFullPath, String logLevel, String dataDir, String param) {
+    public static HashMap<String, String> jobExec(String carteUser, String cartePassword, String carteBaseUrl, String jobFullPath, String logLevel, String jobDir, String dataDir, String param) {
         String urlString = carteBaseUrl + "/kettle/executeJob/";
-        String urlParameter = "job=" + jobFullPath + "&level=" + logLevel + "&pdiDataDir=" + dataDir + "&pdiJobDir=" + dataDir + (param != null ? "&" + param : "");
+        String urlParameter = "job=" + jobFullPath + "&level=" + logLevel + "&pdiDataDir=" + dataDir + "&pdiJobDir=" + jobDir + (param != null ? "&" + param : "");
         return runCarteCommand(carteUser, cartePassword, urlString, urlParameter);
     }
 

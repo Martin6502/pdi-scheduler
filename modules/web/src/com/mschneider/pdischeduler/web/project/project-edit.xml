@@ -35,6 +35,13 @@
                           property="description"
                           rows="3"
                           width="100%"/>
+                <textField id="dataSubDir"
+                           caption="msg://dataSubDir"
+                           contextHelpText="msg://dataSubDirDesc"
+                           datasource="projectDs"
+                           datatype="string"
+                           property="dataSubDir"
+                           width="100%"/>
                 <textField id="pdiSubDir"
                            caption="msg://pdiSubDir"
                            contextHelpText="msg://pdiSubDirDesc"
@@ -51,6 +58,7 @@
                            width="100%"/>
                 <textField id="groupAccess"
                            caption="Access group"
+                           contextHelpText="msg://groupAccessDesc"
                            datasource="projectDs"
                            datatype="string"
                            property="groupAccess"

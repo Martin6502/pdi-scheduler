@@ -42,6 +42,7 @@ create table PDISCHEDULER_PROJECT (
     GROUP_ACCESS varchar(255),
     WORKER_ID uuid not null,
     PDI_SUB_DIR varchar(255),
+    DATA_SUB_DIR varchar(255),
     PDI_PARAMETER varchar(255),
     ACTIVE boolean not null,
     TIMEZONE varchar(255) not null,

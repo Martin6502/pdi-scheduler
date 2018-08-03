@@ -57,6 +57,9 @@ public class Project extends StandardEntity {
     @Column(name = "PDI_SUB_DIR")
     protected String pdiSubDir;
 
+    @Column(name = "DATA_SUB_DIR")
+    protected String dataSubDir;
+
     @Column(name = "PDI_PARAMETER")
     protected String pdiParameter;
 
@@ -76,6 +79,15 @@ public class Project extends StandardEntity {
 
     @Column(name = "CLEANUP_AFTER_DAYS")
     protected Integer cleanupAfterDays = CLEANUP_AFTER_DAYS_DEFAULT;
+
+    public void setDataSubDir(String dataSubDir) {
+        this.dataSubDir = dataSubDir;
+    }
+
+    public String getDataSubDir() {
+        return dataSubDir;
+    }
+
 
     public void setCleanupAfterDays(Integer cleanupAfterDays) {
         this.cleanupAfterDays = cleanupAfterDays;

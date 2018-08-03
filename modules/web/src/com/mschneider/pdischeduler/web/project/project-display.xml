@@ -58,6 +58,7 @@
                 <field caption="msg://workerDataRootDir"
                        editable="false"
                        property="worker.dataRootDir"/>
+                <field property="dataSubDir"/>
             </column>
         </fieldGroup>
         <hbox id="buttonBox"

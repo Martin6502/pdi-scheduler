@@ -100,7 +100,7 @@ public class TaskProcessing {
                     String logLevel = task.getLogLevel();
                     String dataDir = CarteCommand.createFullPath(
                             task.getProject().getWorker().getDataRootDir(),
-                            task.getProject().getPdiSubDir());
+                            task.getProject().getDataSubDir());
                     String reposId = task.getProject().getWorker().getPdiReposId();
                     String reposUser = task.getProject().getWorker().getPdiReposUser();
                     String reposPassword = task.getProject().getWorker().getPdiReposPassword();

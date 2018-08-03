@@ -70,6 +70,7 @@ public class ExportImportProjectServiceBean implements ExportImportProjectServic
                     "timezone",
                     "mailReceiverInfo",
                     "mailReceiverError",
+                    "dataSubDir",
                     "pdiSubDir",
                     "pdiParameter",
                     "active"
@@ -83,6 +84,7 @@ public class ExportImportProjectServiceBean implements ExportImportProjectServic
                         project.getTimezone(),
                         project.getMailReceiverInfo(),
                         project.getMailReceiverError(),
+                        project.getDataSubDir(),
                         project.getPdiSubDir(),
                         project.getPdiParameter(),
                         project.getActive()
@@ -119,6 +121,7 @@ public class ExportImportProjectServiceBean implements ExportImportProjectServic
                 project.setTimezone(record.get("timezone"));
                 project.setMailReceiverInfo(record.get("mailReceiverInfo"));
                 project.setMailReceiverError(record.get("mailReceiverError"));
+                project.setDataSubDir(record.get("dataSubDir"));
                 project.setPdiSubDir(record.get("pdiSubDir"));
                 project.setPdiParameter(record.get("pdiParameter"));
                 project.setActive(Boolean.parseBoolean(record.get("active")));

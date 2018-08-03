@@ -34,7 +34,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.mschneider.pdischeduler'
-        version = "1.0"
+        version = "1.1"
         isSnapshot = false
     }
     tomcat {

@@ -292,7 +292,7 @@ public class TaskProcessing {
                                 logStartIndex = i;
                             }
                         }
-                        String lineContent = (logStartIndex >= 0 && line.length() > logStartIndex) ? line.substring(logStartIndex) : line;
+                        String lineContent = (logStartIndex >= 0 && line.length() >= logStartIndex) ? line.substring(logStartIndex) : line;
                         if (copyHTML) {
                             if (lineContent.startsWith("@@@@@ResultHTMLStop")) {
                                 copyHTML = false;

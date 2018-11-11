@@ -32,7 +32,7 @@ public interface TaskService {
 
     HashMap<String, TaskRun> getLastTaskRun(Project project);
 
-    void taskExec(String taskUUID, TaskRunStartTrigger triggerType);
+    void taskExec(String taskUUID, TaskRunStartTrigger triggerType, boolean forceExec);
 
     boolean isValidCronSpec(String str);
 

@@ -21,6 +21,7 @@
 package com.mschneider.pdischeduler.web.taskrun;
 
 import com.haulmont.bali.util.ParamsMap;
+import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.WindowParam;
 import com.haulmont.cuba.gui.components.*;
@@ -30,11 +31,13 @@ import com.haulmont.cuba.gui.data.Datasource;
 import com.mschneider.pdischeduler.entity.Project;
 import com.mschneider.pdischeduler.entity.Task;
 import com.mschneider.pdischeduler.entity.TaskRun;
+import com.mschneider.pdischeduler.entity.TaskRunStatus;
 import com.mschneider.pdischeduler.utils.TimeZoneUtils;
 import com.mschneider.pdischeduler.web.DateTimezoneFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.Map;
@@ -109,7 +112,21 @@ public class TaskRunList extends AbstractLookup {
             }
         };
         taskRunsTable.addAction(taskDisplayAction);
-    }
+
+        taskRunsTable.setStyleProvider((entity, property) -> {
+            if ("status".equals(property) || "resultCode".equals(property)) {
+                if (entity.getStatus() == TaskRunStatus.error
+                        || entity.getStatus() == TaskRunStatus.timeout
+                        || "FATAL".equals(entity.getResultCode())
+                        || "ERROR".equals(entity.getResultCode())) {
+                    return "error";
+                } else if ("WARN".equals(entity.getResultCode())) {
+                    return "warn";
+                }
+            }
+            return null;
+        });
+   }
 
     private void setHeadline() {
         headline.setValue("Project: " + currProject.getName()

@@ -26,6 +26,8 @@ import com.haulmont.cuba.core.listener.BeforeInsertEntityListener;
 import com.haulmont.cuba.core.listener.BeforeUpdateEntityListener;
 import com.haulmont.cuba.core.listener.BeforeDeleteEntityListener;
 import com.mschneider.pdischeduler.utils.TaskScheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("pdischeduler_TaskEntityListener")
@@ -34,18 +36,23 @@ public class TaskEntityListener implements
         BeforeUpdateEntityListener<Task>,
         BeforeDeleteEntityListener<Task> {
 
+    private static final Logger logger = LoggerFactory.getLogger(TaskEntityListener.class);
+
     @Override
     public void onBeforeInsert(Task entity, EntityManager entityManager) {
+        logger.info("onBeforeInsert: " + entity.getName());
         TaskScheduler.scheduleTask(entity, true);
     }
 
     @Override
     public void onBeforeUpdate(Task entity, EntityManager entityManager) {
+        logger.info("onBeforeUpdate: " + entity.getName());
         TaskScheduler.scheduleTask(entity, true);
     }
 
     @Override
     public void onBeforeDelete(Task entity, EntityManager entityManager) {
+        logger.info("onBeforeDelete: " + entity.getName());
         TaskScheduler.scheduleTask(entity, false);
     }
 

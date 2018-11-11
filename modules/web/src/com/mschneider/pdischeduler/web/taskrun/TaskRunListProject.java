@@ -28,6 +28,7 @@ import com.haulmont.cuba.gui.components.actions.ItemTrackingAction;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.mschneider.pdischeduler.entity.Project;
 import com.mschneider.pdischeduler.entity.TaskRun;
+import com.mschneider.pdischeduler.entity.TaskRunStatus;
 import com.mschneider.pdischeduler.utils.TimeZoneUtils;
 import com.mschneider.pdischeduler.web.DateTimezoneFormatter;
 import org.slf4j.Logger;
@@ -105,6 +106,20 @@ public class TaskRunListProject extends AbstractLookup {
             }
         };
         taskRunsTable.addAction(taskDisplayAction);
+
+        taskRunsTable.setStyleProvider((entity, property) -> {
+            if ("status".equals(property) || "resultCode".equals(property)) {
+                if (entity.getStatus() == TaskRunStatus.error
+                        || entity.getStatus() == TaskRunStatus.timeout
+                        || "FATAL".equals(entity.getResultCode())
+                        || "ERROR".equals(entity.getResultCode())) {
+                    return "error";
+                } else if ("WARN".equals(entity.getResultCode())) {
+                    return "warn";
+                }
+            }
+            return null;
+        });
 
     }
 

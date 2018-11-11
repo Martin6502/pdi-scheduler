@@ -28,6 +28,8 @@ import com.haulmont.cuba.core.listener.BeforeUpdateEntityListener;
 import com.mschneider.pdischeduler.TaskProcessing;
 import com.mschneider.pdischeduler.entity.Project;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component("pdischeduler_ProjectEntityListener")
 public class ProjectEntityListener implements
@@ -35,18 +37,23 @@ public class ProjectEntityListener implements
         BeforeUpdateEntityListener<Project>,
         BeforeDeleteEntityListener<Project> {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProjectEntityListener.class);
+
     @Override
     public void onBeforeInsert(Project entity, EntityManager entityManager) {
+        logger.info("onBeforeInsert: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForProject(entity, true);
     }
 
     @Override
     public void onBeforeUpdate(Project entity, EntityManager entityManager) {
+        logger.info("onBeforeUpdate: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForProject(entity, true);
     }
 
     @Override
     public void onBeforeDelete(Project entity, EntityManager entityManager) {
+        logger.info("onBeforeDelete: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForProject(entity, false);
     }
 

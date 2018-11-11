@@ -9,3 +9,30 @@
   
   @include com_mschneider_pdischeduler-halo-ext;
 }
+
+.halo .v-table-row.error {
+    font-weight: bold;
+    color: #ff0202 !important;
+}
+
+.halo .v-table-row-odd.error {
+    font-weight: bold;
+    color: #ff0202 !important;
+}
+
+.halo .v-table-row.warn {
+    font-weight: bold;
+}
+
+.halo .v-table-row-odd.warn {
+    font-weight: bold;
+}
+
+.halo .v-table-cell-content.error {
+    font-weight: bold;
+    color: #ff0202 !important;
+}
+
+.halo .v-table-cell-content.warn {
+    font-weight: bold;
+}

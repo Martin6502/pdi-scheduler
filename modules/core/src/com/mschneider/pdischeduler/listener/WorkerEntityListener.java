@@ -27,6 +27,8 @@ import com.haulmont.cuba.core.listener.BeforeInsertEntityListener;
 import com.haulmont.cuba.core.listener.BeforeUpdateEntityListener;
 import com.mschneider.pdischeduler.TaskProcessing;
 import com.mschneider.pdischeduler.entity.Worker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("pdischeduler_WorkerEntityListener")
@@ -35,18 +37,23 @@ public class WorkerEntityListener implements
         BeforeUpdateEntityListener<Worker>,
         BeforeDeleteEntityListener<Worker> {
 
+    private static final Logger logger = LoggerFactory.getLogger(WorkerEntityListener.class);
+
     @Override
     public void onBeforeInsert(Worker entity, EntityManager entityManager) {
+        logger.info("onBeforeInsert: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForWorker(entity, true);
     }
 
     @Override
     public void onBeforeUpdate(Worker entity, EntityManager entityManager) {
+        logger.info("onBeforeUpdate: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForWorker(entity, true);
     }
 
     @Override
     public void onBeforeDelete(Worker entity, EntityManager entityManager) {
+        logger.info("onBeforeDelete: " + entity.getName());
         AppBeans.get(TaskProcessing.class).taskResetForWorker(entity, false);
     }
 

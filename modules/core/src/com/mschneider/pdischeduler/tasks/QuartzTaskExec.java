@@ -44,7 +44,7 @@ public class QuartzTaskExec implements Job {
         TaskRunStartTrigger triggerType = TaskRunStartTrigger.fromStr(paramTriggerType);
 
         logger.debug("Start Task UUID = " + paramTaskUUID + ", triggerType = " + paramTriggerType);
-        AppBeans.get(TaskProcessing.class).taskExec(paramTaskUUID, triggerType);
+        AppBeans.get(TaskProcessing.class).taskExec(paramTaskUUID, triggerType, false);
 
     }
 

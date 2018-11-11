@@ -31,4 +31,6 @@
             template="com/mschneider/pdischeduler/web/task/task-display.xml"/>
     <screen id="aboutWindow"
             template="com/mschneider/pdischeduler/web/screens/ext-about-window.xml"/>
+    <screen id="pdischeduler$TaskRun.listAll"
+            template="com/mschneider/pdischeduler/web/taskrun/task-run-list-all.xml"/>
 </screen-config>

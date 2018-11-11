@@ -57,14 +57,8 @@ order by e.sortKey, e.name]]>
             <columns>
                 <column id="sortKey"/>
                 <column id="name"/>
-                <column id="triggerType"/>
-                <column id="cronSpec"/>
-                <column id="cronExclDates"
-                        maxTextLength="12"/>
-                <column id="prevTask"/>
-                <column id="nextRun"
-                        caption="msg://nextRun"
-                        generator="generateNextRunCell"/>
+                <column id="pdiFile"
+                        caption="msg://pdiFile"/>
                 <column id="ltrStartTrigger"
                         caption="msg://ltrStartTrigger"
                         generator="generateLtrStartTriggerCell"/>
@@ -92,6 +86,14 @@ order by e.sortKey, e.name]]>
                         caption="msg://ltrResultText"
                         generator="generateLtrResultTextCell"
                         visible="false"/>
+                <column id="triggerType"/>
+                <column id="cronSpec"/>
+                <column id="cronExclDates"
+                        maxTextLength="12"/>
+                <column id="prevTask"/>
+                <column id="nextRun"
+                        caption="msg://nextRun"
+                        generator="generateNextRunCell"/>
             </columns>
             <rows datasource="currProjectTasksDs"/>
             <rowsCount/>

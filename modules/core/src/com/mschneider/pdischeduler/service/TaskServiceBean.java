@@ -75,8 +75,8 @@ public class TaskServiceBean implements TaskService {
     }
 
     @Override
-    public void taskExec(String taskUUID, TaskRunStartTrigger triggerType) {
-        AppBeans.get(TaskProcessing.class).taskExec(taskUUID, triggerType);
+    public void taskExec(String taskUUID, TaskRunStartTrigger triggerType, boolean forceExec) {
+        AppBeans.get(TaskProcessing.class).taskExec(taskUUID, triggerType, forceExec);
     }
 
     @Override

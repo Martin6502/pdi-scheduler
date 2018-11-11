@@ -69,7 +69,16 @@
           extends="_local"
           name="taskRun-view">
         <property name="task"
-                  view="_minimal"/>
+                  view="_minimal">
+            <property name="project"
+                      view="_minimal">
+                <property name="timezone"/>
+                <property name="worker"
+                          view="_minimal">
+                    <property name="timezone"/>
+                </property>
+            </property>
+        </property>
     </view>
     <view class="com.mschneider.pdischeduler.entity.Project"
           extends="_local"

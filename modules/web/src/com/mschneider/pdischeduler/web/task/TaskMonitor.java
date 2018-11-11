@@ -101,6 +101,21 @@ public class TaskMonitor extends AbstractLookup {
             }
         });
 
+        tasksTable.setStyleProvider((entity, property) -> {
+
+            if (entity != null
+                    && entity.getLastTaskRun() != null
+                    && ("ltrStatus".equals(property) || "ltrResultCode".equals(property))) {
+                String str = entity.getLastTaskRun().get(0).getResultCode();
+                if ("FATAL".equals(str) || "ERROR".equals(str)) {
+                    return "error";
+                } else if ("WARN".equals(str)) {
+                    return "warn";
+                }
+            }
+            return null;
+        });
+
         ItemTrackingAction taskrunAction = new ItemTrackingAction("taskrun") {
             @Override
             public void actionPerform(Component component) {
@@ -138,7 +153,7 @@ public class TaskMonitor extends AbstractLookup {
             public void actionPerform(Component component) {
                 logger.info("execSingleAction");
                 if (tasksTable.getSingleSelected() != null) {
-                    taskService.taskExec(tasksTable.getSingleSelected().getId().toString(), TaskRunStartTrigger.manualSingle);
+                    taskService.taskExec(tasksTable.getSingleSelected().getId().toString(), TaskRunStartTrigger.manualSingle, false);
                 }
                 onRefreshBtnClick();
             }
@@ -150,7 +165,7 @@ public class TaskMonitor extends AbstractLookup {
             public void actionPerform(Component component) {
                 logger.info("execSequenceAction");
                 if (tasksTable.getSingleSelected() != null) {
-                    taskService.taskExec(tasksTable.getSingleSelected().getId().toString(), TaskRunStartTrigger.manualSeq);
+                    taskService.taskExec(tasksTable.getSingleSelected().getId().toString(), TaskRunStartTrigger.manualSeq, false);
                 }
                 onRefreshBtnClick();
             }

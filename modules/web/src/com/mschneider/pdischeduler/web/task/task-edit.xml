@@ -19,7 +19,7 @@ where e.id = :param$currProject]]>
                               class="com.mschneider.pdischeduler.entity.Task">
             <query>
                 <![CDATA[select e from pdischeduler$Task e
-where e.project.id = :param$currProject order by e.sortKey, e.name]]>
+where e.project.id = :param$currProject order by e.name]]>
             </query>
         </collectionDatasource>
     </dsContext>

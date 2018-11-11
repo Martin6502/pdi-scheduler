@@ -35,8 +35,7 @@ order by e.name]]>
             </actions>
             <columns>
                 <column id="name"/>
-                <column id="description"
-                        maxTextLength="25"/>
+                <column id="description" maxTextLength="50"/>
                 <column id="groupAccess"/>
                 <column id="worker"/>
                 <column id="timezone"/>

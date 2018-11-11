@@ -13,7 +13,7 @@
     </dsContext>
     <dialogMode forceDialog="true"
                 height="AUTO"
-                width="600"/>
+                width="1000"/>
     <layout expand="buttonBox"
             spacing="true">
         <label id="headline"/>
@@ -48,9 +48,9 @@
                   property="logText"
                   width="100%"/>
         <browserFrame id="resultHTML"
-                  caption="msg://resultHTML"
-                  height="100px"
-                  width="100%"/>
+                      caption="msg://resultHTML"
+                      height="100px"
+                      width="100%"/>
         <hbox id="buttonBox"
               spacing="true">
             <button id="closeBtn"

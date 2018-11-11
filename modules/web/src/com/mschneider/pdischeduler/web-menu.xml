@@ -5,5 +5,6 @@
         <item screen="pdischeduler$Worker.browse"/>
         <item screen="pdischeduler$Project.browse"/>
         <item screen="pdischeduler$Project.list"/>
+        <item screen="pdischeduler$TaskRun.listAll"/>
     </menu>
 </menu-config>

@@ -67,16 +67,17 @@ public class TaskProcessing {
     private EmailerAPI emailerAPI;
 
     @Authenticated
-    public void taskExec(String taskUUID, TaskRunStartTrigger triggerType) {
+    public void taskExec(String taskUUID, TaskRunStartTrigger triggerType, boolean forceExec) {
         logger.info("taskExec: taskUUID = " + taskUUID + ", triggerType = " + triggerType);
 
         Transaction tx = persistence.createTransaction();
         try {
             Task task = persistence.getEntityManager().find(Task.class, UUID.fromString(taskUUID));
             if (task != null
-                    && task.getActive()
-                    && task.getProject().getActive()
-                    && task.getProject().getWorker().getActive()
+                    && (forceExec || (
+                            task.getActive()
+                            && task.getProject().getActive()
+                            && task.getProject().getWorker().getActive()))
                     && (!DateExclude.checkExcluded(TimeZoneUtils.dateNow(task.getProject().getTimezone()), task.getCronExclDates())
                     || triggerType == TaskRunStartTrigger.manualSingle || triggerType == TaskRunStartTrigger.manualSeq)) {
 
@@ -229,6 +230,7 @@ public class TaskProcessing {
                             logText = "ERROR: Carte Stop did not work";
                             logger.error("timeout problem" + taskRun.getTask().getProject().getName() + " - " + taskRun.getTask().getName());
                             deleteStatusJob = true;
+                            resultCode = "FATAL";
                         } else if (currExecSec >= timeoutSec) {
                             // timeout reached, send stop command to Carte
                             HashMap<String, String> map2;
@@ -441,7 +443,7 @@ public class TaskProcessing {
 
     @Authenticated
     public void taskResetForWorker(Worker worker, boolean activateWorker) {
-        logger.info("Start taskResetForWorker");
+        logger.info("taskResetForWorker: " + worker.getName() + " , activateWorker=" + activateWorker);
         List<Task> allTasks;
         boolean activate = activateWorker && worker.getActive();
         Transaction tx = persistence.createTransaction();
@@ -465,7 +467,7 @@ public class TaskProcessing {
 
     @Authenticated
     public void taskResetForProject(Project project, boolean activateProject) {
-        logger.info("Start taskResetForProject");
+        logger.info("taskResetForProject: " + project.getName() + " , activateProject=" + activateProject);
         List<Task> allTasks;
         boolean activate = activateProject && project.getActive() && project.getWorker().getActive();
         Transaction tx = persistence.createTransaction();

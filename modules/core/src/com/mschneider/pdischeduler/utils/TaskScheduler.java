@@ -71,6 +71,7 @@ public class TaskScheduler {
             // Grab the Scheduler instance from the Factory
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
+            logger.debug("scheduleTask: " + task.getProject().getName() + " - " + task.getName() + ", task.active=" + task.getActive() + ", activate=" + activate);
             if (task.getActive() && activate) {
                 // activate task
                 logger.debug("scheduleTask add job: " + task.getProject().getName() + " - " + task.getName());

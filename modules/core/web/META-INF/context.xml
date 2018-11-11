@@ -5,9 +5,9 @@
               maxTotal="20"
               maxWaitMillis="5000"
               name="jdbc/CubaDS"
-              password="rGocP6w8VJk7fqRfMsM9"
+              password="oJdMkf8vIlmA3aZYiRh1"
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://192.168.66.80/pdischeduler?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
+              url="jdbc:postgresql://127.0.0.1/pdischeduler?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;sslmode=verify-ca"
               username="pdischeduler"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>

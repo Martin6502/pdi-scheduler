@@ -33,12 +33,14 @@ import com.haulmont.chile.core.annotations.MetaProperty;
 
 import javax.persistence.Transient;
 
+import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.mschneider.pdischeduler.utils.CryptUtils;
 
 import javax.persistence.Lob;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @NamePattern("%s|name")
+@Listeners("pdischeduler_WorkerEntityListener")
 @Table(name = "PDISCHEDULER_WORKER")
 @Entity(name = "pdischeduler$Worker")
 public class Worker extends StandardEntity {

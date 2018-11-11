@@ -22,6 +22,7 @@ package com.mschneider.pdischeduler.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -30,6 +31,7 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 @NamePattern("%s|name")
+@Listeners("pdischeduler_ProjectEntityListener")
 @Table(name = "PDISCHEDULER_PROJECT")
 @Entity(name = "pdischeduler$Project")
 public class Project extends StandardEntity {

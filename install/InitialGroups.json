@@ -8,15 +8,43 @@
       "version": 0,
       "name": "Company"
     },
-    "version": 1,
+    "version": 2,
     "constraints": [
+      {
+        "_entityName": "sec$Constraint",
+        "id": "ba45d1ab-627b-9acb-8d85-9f50e499baa6",
+        "checkType": "DATABASE",
+        "whereClause": "{E}.project.groupAccess like \u0027TEST2%\u0027",
+        "isActive": true,
+        "version": 2,
+        "entityName": "pdischeduler$Task",
+        "operationType": "ALL",
+        "group": {
+          "_entityName": "sec$Group",
+          "id": "fea0e3e0-e2d0-a4bd-2a6b-36d31b80f0bd"
+        }
+      },
+      {
+        "_entityName": "sec$Constraint",
+        "id": "297228d9-e98a-951d-8edf-90fb0377e865",
+        "checkType": "DATABASE",
+        "whereClause": "{E}.task.project.groupAccess like \u0027TEST2%\u0027",
+        "isActive": true,
+        "version": 1,
+        "entityName": "pdischeduler$TaskRun",
+        "operationType": "ALL",
+        "group": {
+          "_entityName": "sec$Group",
+          "id": "fea0e3e0-e2d0-a4bd-2a6b-36d31b80f0bd"
+        }
+      },
       {
         "_entityName": "sec$Constraint",
         "id": "1083e6b2-8bfb-2909-b3df-ab0935528559",
         "checkType": "DATABASE",
-        "whereClause": "{E}.groupAccess like \u0027PGROUP%\u0027",
+        "whereClause": "{E}.groupAccess like \u0027TEST2%\u0027",
         "isActive": true,
-        "version": 1,
+        "version": 2,
         "entityName": "pdischeduler$Project",
         "operationType": "ALL",
         "group": {
@@ -25,11 +53,24 @@
         }
       }
     ],
-    "name": "PGROUP",
+    "name": "TEST2",
     "hierarchyList": [
       {
         "_entityName": "sec$GroupHierarchy",
         "id": "2a1c7a21-094e-ef00-31d0-b9d794ac8afc",
+        "parent": {
+          "_entityName": "sec$Group",
+          "id": "0fa2b1a5-1d68-4d69-9fbd-dff348347f93"
+        },
+        "level": 0,
+        "group": {
+          "_entityName": "sec$Group",
+          "id": "fea0e3e0-e2d0-a4bd-2a6b-36d31b80f0bd"
+        }
+      },
+      {
+        "_entityName": "sec$GroupHierarchy",
+        "id": "ff4c4a7f-12ea-7f72-b1e6-0161c96be733",
         "parent": {
           "_entityName": "sec$Group",
           "id": "0fa2b1a5-1d68-4d69-9fbd-dff348347f93"

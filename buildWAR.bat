@@ -1,3 +1,3 @@
 call gradlew buildWar
-copy build\distributions\war\pdischeduler.war install
+echo generated build\distributions\war\pdischeduler.war
 pause

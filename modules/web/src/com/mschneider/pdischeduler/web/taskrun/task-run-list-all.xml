@@ -29,7 +29,11 @@ order by e.startTime desc]]>
         <filter id="filter"
                 applyTo="taskRunsTable"
                 datasource="taskRunsDs">
-            <properties include=".*"/>
+            <properties include="(startTime|stopTime|durationSec|logText|resultCode|resultHTML|startTrigger|status)"/>
+            <property caption="msg://Task.name"
+                      name="task.name"/>
+            <property caption="msg://Project.name"
+                      name="task.project.name"/>
         </filter>
         <table id="taskRunsTable"
                width="100%">

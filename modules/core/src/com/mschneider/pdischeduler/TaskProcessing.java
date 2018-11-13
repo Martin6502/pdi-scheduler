@@ -317,7 +317,13 @@ public class TaskProcessing {
                     }
                     taskRun.setLogText(logClean.toString());
                 }
+
+                // overwrite resultCode in case of real error
+                if (status == TaskRunStatus.error || status == TaskRunStatus.timeout) {
+                    resultCode = "FATAL";
+                }
                 taskRun.setResultCode(resultCode);
+
                 ZonedDateTime logLastZDT = scanDate(lastLogLine, taskRun.getTask().getProject().getWorker().getTimezone());
                 if (logLastZDT == null && resultDateStr != null) {
                     logLastZDT = scanDate(resultDateStr, taskRun.getTask().getProject().getWorker().getTimezone());

@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.10.3'
+    ext.cubaVersion = '6.10.4'
     repositories {
         
         maven {
@@ -34,7 +34,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.mschneider.pdischeduler'
-        version = "1.2"
+        version = "1.2.1"
         isSnapshot = false
     }
     tomcat {

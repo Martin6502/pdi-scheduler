@@ -28,6 +28,7 @@
             <property name="dataRootDir"/>
             <property name="workerType"/>
             <property name="pdiRootDir"/>
+            <property name="active"/>
         </property>
     </view>
     <view class="com.mschneider.pdischeduler.entity.Task"

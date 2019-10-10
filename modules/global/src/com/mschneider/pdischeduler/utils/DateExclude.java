@@ -31,7 +31,7 @@ public class DateExclude {
 
     private static final Logger logger = LoggerFactory.getLogger(DateExclude.class);
 
-    private static final String DATE_PATTERN = "[2][0][0-1][0-9]-[0-1][0-9]-[0-3][0-9]";
+    private static final String DATE_PATTERN = "[2][0][0-9][0-9]-[0-1][0-9]-[0-3][0-9]";
 
     @SuppressWarnings("RedundantCollectionOperation")
     public static boolean checkExcluded(String refDate, String exclStr) {

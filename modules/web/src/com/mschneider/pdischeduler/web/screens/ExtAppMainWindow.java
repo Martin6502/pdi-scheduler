@@ -29,6 +29,6 @@ public class ExtAppMainWindow extends AppMainWindow {
     public void ready() {
         super.ready();
 
-        openWindow("pdischeduler$Project.list", WindowManager.OpenType.NEW_TAB);
+        // openWindow("pdischeduler$Project.list", WindowManager.OpenType.NEW_TAB);
     }
 }

@@ -21,13 +21,7 @@
             /WEB-INF/local.app.properties
         </param-value>
     </context-param>
-    
-    <context-param>
-        <description>Web resources version for correct caching in browser</description>
-        <param-name>webResourcesTs</param-name>
-        <param-value>${webResourcesTs}</param-value>
-    </context-param>
-    
+
 
     <!-- Middleware parameters -->
 
@@ -43,14 +37,11 @@
     <!--Application components-->
     <context-param>
         <param-name>appComponents</param-name>
-        <param-value>com.haulmont.cuba</param-value>
+        <param-value>com.haulmont.cuba com.haulmont.addon.restapi</param-value>
     </context-param>
 
     <!-- Servlet context listeners that load the application blocks -->
-    
-    <listener>
-        <listener-class>com.vaadin.server.communication.JSR356WebsocketInitializer</listener-class>
-    </listener>
+
     <listener>
         <listener-class>com.haulmont.cuba.core.sys.singleapp.SingleAppCoreServletListener</listener-class>
     </listener>

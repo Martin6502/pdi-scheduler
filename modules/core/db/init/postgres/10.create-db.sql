@@ -95,6 +95,9 @@ create table PDISCHEDULER_TASK_RUN (
     LOG_TEXT text,
     RESULT_CODE varchar(255),
     RESULT_HTML text,
+    FOLLOW_UP_STATUS integer,
+    FOLLOW_UP_COMMENT text,
+    FOLLOW_UP_USER text,
     --
     primary key (ID)
 )^

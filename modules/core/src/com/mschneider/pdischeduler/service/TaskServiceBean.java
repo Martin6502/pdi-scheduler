@@ -80,6 +80,11 @@ public class TaskServiceBean implements TaskService {
     }
 
     @Override
+    public void taskStop(String taskUUID) {
+        AppBeans.get(TaskProcessing.class).taskStop(taskUUID);
+    }
+
+    @Override
     public boolean isValidCronSpec(String str) {
         return CronExpression.isValidExpression(str);
     }

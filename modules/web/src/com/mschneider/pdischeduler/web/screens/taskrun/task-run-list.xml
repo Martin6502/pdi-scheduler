@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://listCaption"
+        focusComponent="taskRunsTable"
+        messagesPack="com.mschneider.pdischeduler.web.screens.taskrun">
+    <data readOnly="true">
+        <collection id="taskRunsDc"
+                    class="com.mschneider.pdischeduler.entity.TaskRun"
+                    view="taskRun-view">
+            <loader id="taskRunsDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$TaskRun e
+where e.task.id = :currTaskId
+order by e.startTime desc]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <timers>
+        <timer id="refreshTimer"
+               autostart="true"
+               delay="60000"
+               onTimer="refreshTimerCall"
+               repeating="true"/>
+    </timers>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="taskRunsTable"
+            spacing="true">
+        <label id="headline"
+               stylename="bold"/>
+        <filter id="filter"
+                applyTo="taskRunsTable"
+                dataLoader="taskRunsDl">
+            <properties include="(startTime|stopTime|durationSec|logText|resultCode|resultHTML|startTrigger|status)"/>
+        </filter>
+        <table id="taskRunsTable"
+               width="100%"
+               dataContainer="taskRunsDc">
+            <actions>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="generateStartTime"
+                        caption="msg://startTime"
+                        generator="generateStartTimeField"/>
+                <column id="generateStopTime"
+                        caption="msg://stopTime"
+                        generator="generateStopTimeField"/>
+                <column id="durationSec"/>
+                <column id="startTrigger"/>
+                <column id="status"/>
+                <column id="resultCode"/>
+                <column id="followUpStatus"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="displayBtn"
+                        action="taskRunsTable.taskrundisplay"
+                        caption="msg://displayCaption"
+                        icon="EYE"/>
+                <button id="taskDisplayBtn"
+                        action="taskRunsTable.taskdisplay"
+                        caption="msg://taskDisplayCaption"
+                        icon="EYE"/>
+                <button id="projectDisplayBtn"
+                        action="taskRunsTable.projectdisplay"
+                        caption="msg://projectDisplayCaption"
+                        icon="EYE"/>
+                <button id="editfollowup"
+                        action="taskRunsTable.editfollowup"
+                        caption="msg://editFollowUpCaption"
+                        icon="EDIT"/>
+                <button id="refreshBtn"
+                        caption="msg://refreshCaption"
+                        invoke="onRefreshBtnClick"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

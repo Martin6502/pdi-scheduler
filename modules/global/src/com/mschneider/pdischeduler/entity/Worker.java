@@ -38,7 +38,6 @@ import com.mschneider.pdischeduler.utils.CryptUtils;
 
 import javax.persistence.Lob;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
 @NamePattern("%s|name")
 @Listeners("pdischeduler_WorkerEntityListener")
 @Table(name = "PDISCHEDULER_WORKER")

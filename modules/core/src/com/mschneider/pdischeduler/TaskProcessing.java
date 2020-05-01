@@ -26,6 +26,7 @@ import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TypedQuery;
 import com.haulmont.cuba.core.app.EmailerAPI;
 import com.haulmont.cuba.core.global.EmailInfo;
+import com.haulmont.cuba.core.global.EmailInfoBuilder;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.security.app.Authenticated;
 import com.mschneider.pdischeduler.entity.*;
@@ -182,7 +183,45 @@ public class TaskProcessing {
     }
 
     @Authenticated
-    @SuppressWarnings("ConstantConditions")
+    public void taskStop(String taskUUID) {
+        logger.info("taskStop: taskUUID = " + taskUUID);
+
+        Transaction tx = persistence.createTransaction();
+        try {
+            Task task = persistence.getEntityManager().find(Task.class, UUID.fromString(taskUUID));
+            if (task != null) {
+                TaskRun taskRun = findLastTaskRun(persistence.getEntityManager(), task);
+                if (taskRun != null) {
+                    if (taskRun.getStatus() == TaskRunStatus.started) {
+                        // found a still running taskRun
+                        // timeout reached, send stop command to Carte
+                        String user = taskRun.getTask().getProject().getWorker().getUserid();
+                        String pass = taskRun.getTask().getProject().getWorker().getPassword();
+                        String baseUrl = taskRun.getTask().getProject().getWorker().getUrl();
+                        String jobFullPath = CarteCommand.createFullPath(
+                                taskRun.getTask().getProject().getWorker().getPdiRootDir(),
+                                taskRun.getTask().getProject().getPdiSubDir(),
+                                taskRun.getTask().getPdiFile());
+                        String jobName = CarteCommand.getJobName(jobFullPath);
+                        String workerCode = taskRun.getWorkerCode();
+
+                        HashMap<String, String> map2;
+                        map2 = CarteCommand.jobStop(user, pass, baseUrl, jobName, workerCode);
+                        logger.info("taskStop: marked for stop: " + taskRun.getTask().getProject().getName() + " - " + taskRun.getTask().getName() + " : " + map2.get("result"));
+                    } else {
+                        logger.info("taskStop: no active tasRun found: " + taskRun.getTask().getProject().getName() + " - " + taskRun.getTask().getName());
+                    }
+                }
+            }
+            tx.commit();
+        } catch(Exception se) {
+            se.printStackTrace();
+        } finally {
+            tx.end();
+        }
+    }
+
+    @Authenticated
     public void taskStatus(String taskRunUUID) {
         Transaction tx = persistence.createTransaction();
         try {
@@ -282,8 +321,9 @@ public class TaskProcessing {
                 String resultDateStr = null;
                 if (logText != null) {
                     boolean copyHTML = false;
-                    StringBuffer logClean = new StringBuffer();
-                    StringBuffer htmlClean = new StringBuffer();
+                    boolean logCleanTruncated = false;
+                    StringBuilder logClean = new StringBuilder();
+                    StringBuilder htmlClean = new StringBuilder();
                     String[] lines = logText.split("\\r?\\n");
                     int logStartIndex = -1;
                     for (String line : lines) {
@@ -312,7 +352,14 @@ public class TaskProcessing {
                             if (line.startsWith("20")) {
                                 lastLogLine = line;
                             }
-                            logClean.append(line).append("\n");
+                            if (!logCleanTruncated) {
+                                if (logClean.length() < 100000) {
+                                    logClean.append(line).append("\n");
+                                } else {
+                                    logClean.append("--- truncated by PDI Scheduler ---").append("\n");
+                                    logCleanTruncated = true;
+                                }
+                            }
                         }
                     }
                     taskRun.setLogText(logClean.toString());
@@ -499,7 +546,7 @@ public class TaskProcessing {
         try {
             TypedQuery<TaskRun> query = entityManager.createQuery(
                     "select tr from pdischeduler$TaskRun tr where tr.task.id = ?1 order by tr.startTime desc", TaskRun.class);
-            query.setParameter(1, task);
+            query.setParameter(1, task.getId());
             query.setMaxResults(1);
             List<TaskRun> taskRunList = query.getResultList();
             if (taskRunList.size() < 1) {
@@ -524,8 +571,8 @@ public class TaskProcessing {
                         "select t from pdischeduler$Task t where t.active = TRUE " +
                                 "and t.triggerType in (" + TaskTriggerType.prevTaskAll.getId() + ", " + TaskTriggerType.prevTaskOk.getId() + ", " + TaskTriggerType.prevTaskErr.getId() + ") " +
                                 "and t.prevTask.id = ?1", Task.class);
-                query.setParameter(1, prevTask);
-                query.setMaxResults(1);
+                query.setParameter(1, prevTask.getId());
+                // query.setMaxResults(1);
                 List<Task> nextTaskList = query.getResultList();
                 for (Task task : nextTaskList) {
 
@@ -585,13 +632,13 @@ public class TaskProcessing {
 
                 logger.debug("´params: " + params);
 
-                EmailInfo emailInfo = new EmailInfo(
-                        receiver,
-                        subject,
-                        null,
-                        EmailInfo.HTML_CONTENT_TYPE,
-                        "com/mschneider/pdischeduler/templates/mail_failure_en.html",
-                        params);
+                EmailInfo emailInfo = EmailInfoBuilder.create()
+                        .setAddresses(receiver)
+                        .setCaption(subject)
+                        .setBodyContentType(EmailInfo.HTML_CONTENT_TYPE)
+                        .setTemplatePath("com/mschneider/pdischeduler/templates/mail_failure_en.html")
+                        .setTemplateParameters(params)
+                        .build();
 
                 emailerAPI.sendEmailAsync(emailInfo);
             }
@@ -619,13 +666,13 @@ public class TaskProcessing {
                 params.put("taskrunDuration", taskRun.getDurationSec());
                 params.put("taskrunLog", text2html(taskRun.getLogText()));
 
-                EmailInfo emailInfo = new EmailInfo(
-                        receiver,
-                        subject,
-                        null,
-                        EmailInfo.HTML_CONTENT_TYPE,
-                        "com/mschneider/pdischeduler/templates/mail_success_en.html",
-                        params);
+                EmailInfo emailInfo = EmailInfoBuilder.create()
+                        .setAddresses(receiver)
+                        .setCaption(subject)
+                        .setBodyContentType(EmailInfo.HTML_CONTENT_TYPE)
+                        .setTemplatePath("com/mschneider/pdischeduler/templates/mail_success_en.html")
+                        .setTemplateParameters(params)
+                        .build();
 
                 emailerAPI.sendEmailAsync(emailInfo);
             }

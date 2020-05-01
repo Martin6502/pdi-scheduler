@@ -20,6 +20,7 @@
 
 package com.mschneider.pdischeduler.entity;
 
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
@@ -76,6 +77,26 @@ public class TaskRun extends BaseUuidEntity {
     @Column(name = "RESULT_HTML")
     protected String resultHTML;
 
+    @Column(name = "FOLLOW_UP_STATUS", nullable = true)
+    protected Integer followUpStatus;
+
+    @Lob
+    @Column(name = "FOLLOW_UP_COMMENT")
+    protected String followUpComment;
+
+    @Lob
+    @Column(name = "FOLLOW_UP_USER")
+    protected String followUpUser;
+
+    @Transient
+    @MetaProperty
+    protected String startTimeFormatted;
+
+    @Transient
+    @MetaProperty
+    protected String stopTimeFormatted;
+
+
     public TaskRunStatus getStatus() {
         return status == null ? null : TaskRunStatus.fromId(status);
     }
@@ -93,6 +114,13 @@ public class TaskRun extends BaseUuidEntity {
         this.startTrigger = startTrigger == null ? null : startTrigger.getId();
     }
 
+    public TaskRunFollowUp getFollowUpStatus() {
+        return followUpStatus == null ? null : TaskRunFollowUp.fromId(followUpStatus);
+    }
+
+    public void setFollowUpStatus(TaskRunFollowUp followUpStatus) {
+        this.followUpStatus = followUpStatus == null ? null : followUpStatus.getId();
+    }
 
     public void setTask(Task task) {
         this.task = task;
@@ -156,6 +184,38 @@ public class TaskRun extends BaseUuidEntity {
 
     public String getResultHTML() {
         return resultHTML;
+    }
+
+    public String getStartTimeFormatted() {
+        return startTimeFormatted;
+    }
+
+    public void setStartTimeFormatted(String startTimeFormatted) {
+        this.startTimeFormatted = startTimeFormatted;
+    }
+
+    public String getStopTimeFormatted() {
+        return stopTimeFormatted;
+    }
+
+    public void setStopTimeFormatted(String stopTimeFormatted) {
+        this.stopTimeFormatted = stopTimeFormatted;
+    }
+
+    public void setFollowUpComment(String followUpComment) {
+        this.followUpComment = followUpComment;
+    }
+
+    public String getFollowUpComment() {
+        return followUpComment;
+    }
+
+    public String getFollowUpUser() {
+        return followUpUser;
+    }
+
+    public void setFollowUpUser(String followUpUser) {
+        this.followUpUser = followUpUser;
     }
 
 }

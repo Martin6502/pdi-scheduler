@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.mschneider.pdischeduler.web.screens.taskrun">
+    <data>
+        <instance id="taskRunDc"
+                  class="com.mschneider.pdischeduler.entity.TaskRun"
+                  view="taskRun-view">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="taskRunDc">
+                <column width="600px">
+                    <label id="headline" stylename="bold"/>
+                    <field editable="false"
+                           property="startTimeFormatted"/>
+                    <field editable="false"
+                           property="stopTimeFormatted"/>
+                    <field editable="false"
+                           property="startTrigger"/>
+                    <field editable="false"
+                           property="status"/>
+                    <field editable="false"
+                           property="resultCode"/>
+                    <textArea id="logText"
+                              caption="msg://logText"
+                              editable="false"
+                              rows="5"
+                              property="logText"
+                              width="100%"/>
+                    <browserFrame id="resultHTML"
+                                  caption="msg://resultHTML"
+                                  height="100px"
+                                  width="100%"/>
+                    <label value="msg://editFollowUpHeadline2" stylename="bold"/>
+                    <lookupField id="followUpStatusField" property="followUpStatus"/>
+                    <textArea id="followUpComment"
+                              rows="5"
+                              property="followUpComment"
+                              width="100%"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

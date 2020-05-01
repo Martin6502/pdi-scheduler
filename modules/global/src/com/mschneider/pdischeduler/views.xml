@@ -21,14 +21,15 @@
     <view class="com.mschneider.pdischeduler.entity.Project"
           extends="_local"
           name="project-view">
-        <property name="worker"
-                  view="_minimal">
-            <property name="timezone"/>
+        <property name="worker" view="_minimal">
+            <property name="active"/>
             <property name="url"/>
+            <property name="passwordEncr"/>
+            <property name="timezone"/>
             <property name="dataRootDir"/>
             <property name="workerType"/>
             <property name="pdiRootDir"/>
-            <property name="active"/>
+            <property name="pdiReposPasswordEncr"/>
         </property>
     </view>
     <view class="com.mschneider.pdischeduler.entity.Task"
@@ -69,15 +70,14 @@
     <view class="com.mschneider.pdischeduler.entity.TaskRun"
           extends="_local"
           name="taskRun-view">
-        <property name="task"
-                  view="_minimal">
-            <property name="project"
-                      view="_minimal">
-                <property name="timezone"/>
-                <property name="worker"
-                          view="_minimal">
+        <property name="task" view="_minimal">
+            <property name="project" view="_minimal">
+                <property name="worker" view="_minimal">
+                    <property name="passwordEncr"/>
                     <property name="timezone"/>
+                    <property name="pdiReposPasswordEncr"/>
                 </property>
+                <property name="timezone"/>
             </property>
         </property>
     </view>
@@ -108,5 +108,9 @@
           name="task-export">
         <property name="prevTask"
                   view="_minimal"/>
+    </view>
+    <view entity="pdischeduler$Worker" name="worker-lookup" extends="_minimal">
+        <property name="passwordEncr"/>
+        <property name="pdiReposPasswordEncr"/>
     </view>
 </views>

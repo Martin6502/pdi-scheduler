@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://monitorCaption"
+        focusComponent="tasksTable"
+        messagesPack="com.mschneider.pdischeduler.web.screens.task">
+    <data readOnly="true">
+        <collection id="tasksDc"
+                    class="com.mschneider.pdischeduler.entity.Task"
+                    view="task-view">
+            <loader id="tasksDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Task e
+where e.project.id = :currProjectId and e.active = 1 and e.project.active = 1 and e.project.worker.active = 1
+order by e.sortKey, e.name]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <timers>
+        <timer id="refreshTimer"
+               autostart="true"
+               delay="60000"
+               onTimer="refreshTimerCall"
+               repeating="true"/>
+    </timers>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tasksTable"
+            spacing="true">
+        <label id="headline"
+               stylename="bold"/>
+        <filter id="filter"
+                applyTo="tasksTable"
+                dataLoader="tasksDl">
+            <properties include="(name|description|pdiFile|pdiParameter|logLevel|sortKey|triggerType|cronSpec|cronExclDates|timeoutSec)"/>
+        </filter>
+        <table id="tasksTable"
+                    width="100%"
+                    dataContainer="tasksDc">
+            <actions>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="sortKey"/>
+                <column id="name"/>
+                <column id="pdiFile"
+                        caption="msg://pdiFile"/>
+                <column id="ltrStartTrigger"
+                        caption="msg://ltrStartTrigger"
+                        generator="generateLtrStartTriggerCell"/>
+                <column id="ltrStartTime"
+                        caption="msg://ltrStartTime"
+                        generator="generateLtrStartTimeCell"/>
+                <column id="ltrStopTime"
+                        caption="msg://ltrStopTime"
+                        generator="generateLtrStopTimeCell"/>
+                <column id="ltrDurationSec"
+                        caption="msg://ltrDurationSec"
+                        generator="generateLtrDurationSecCell"/>
+                <column id="ltrStatus"
+                        caption="msg://ltrStatus"
+                        generator="generateLtrStatusCell"/>
+                <column id="ltrResultCode"
+                        caption="msg://ltrResultCode"
+                        generator="generateLtrResultCodeCell"/>
+                <column id="ltrLogText"
+                        caption="msg://ltrLogText"
+                        generator="generateLtrLogTextCell"
+                        maxTextLength="20"
+                        visible="false"/>
+                <column id="ltrResultText"
+                        caption="msg://ltrResultText"
+                        generator="generateLtrResultTextCell"
+                        visible="false"/>
+                <column id="triggerType"/>
+                <column id="cronSpec"/>
+                <column id="cronExclDates"
+                        maxTextLength="12"/>
+                <column id="prevTask"/>
+                <column id="nextRun"
+                        caption="msg://nextRun"
+                        generator="generateNextRunCell"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="taskrunBtn"
+                        action="tasksTable.taskrun"
+                        caption="msg://taskrunCaption"
+                        icon="LIST"/>
+                <button id="taskDisplayBtn"
+                        action="tasksTable.taskdisplay"
+                        caption="msg://taskDisplayCaption"
+                        icon="EYE"/>
+                <button id="projectDisplayBtn"
+                        action="tasksTable.projectdisplay"
+                        caption="msg://projectDisplayCaption"
+                        icon="EYE"/>
+                <button id="execSingleBtn"
+                        action="tasksTable.execSingle"
+                        caption="msg://execSingleCaption"
+                        icon="ANGLE_RIGHT"/>
+                <button id="execSequenceBtn"
+                        action="tasksTable.execSequence"
+                        caption="msg://execSequenceCaption"
+                        icon="ANGLE_DOUBLE_RIGHT"/>
+                <button id="stopBtn"
+                        action="tasksTable.stop"
+                        caption="msg://stopCaption"
+                        icon="CANCEL"/>
+                <button id="refreshBtn"
+                        caption="msg://refreshCaption"
+                        invoke="onRefreshBtnClick"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

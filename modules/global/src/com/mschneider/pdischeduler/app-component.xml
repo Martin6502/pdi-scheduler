@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
-               dependsOn="com.haulmont.cuba">
+               dependsOn="com.haulmont.cuba, com.haulmont.addon.restapi">
     <module blocks="*"
             name="global">
         <artifact appJar="true"
@@ -42,7 +42,7 @@
                   ext="zip"
                   name="pdischeduler-web"/>
         <artifact configuration="themes"
-                  name="pdischeduler-web-themes"/>
+                  name="pdischeduler-web" ext="jar"/>
         <property name="cuba.springContextConfig"
                   value="+com/mschneider/pdischeduler/web-spring.xml"/>
         <property name="cuba.dispatcherSpringContextConfig"
@@ -55,8 +55,5 @@
                   value="+com/mschneider/pdischeduler/web-permissions.xml"/>
         <property name="cuba.mainMessagePack"
                   value="+com.mschneider.pdischeduler.web"/>
-    </module>
-    <module name="web-themes">
-        <artifact name="pdischeduler-web-themes"/>
     </module>
 </app-component>

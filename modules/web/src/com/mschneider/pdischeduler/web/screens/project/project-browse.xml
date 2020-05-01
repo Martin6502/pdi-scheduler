@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="projectsTable"
+        messagesPack="com.mschneider.pdischeduler.web.screens.project">
+    <data readOnly="true">
+        <collection id="projectsDc"
+                    class="com.mschneider.pdischeduler.entity.Project"
+                    view="project-view">
+            <loader id="projectsDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Project e order by e.name]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="projectsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="projectsTable"
+                dataLoader="projectsDl">
+            <properties include=".*"/>
+        </filter>
+        <table id="projectsTable"
+               width="100%"
+               dataContainer="projectsDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create">
+               </action>
+                <action id="edit" type="edit">
+                </action>
+                <action id="remove" type="remove">
+                </action>
+                <action id="refresh" type="refresh">
+                </action>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="description" maxTextLength="50"/>
+                <column id="groupAccess"/>
+                <column id="worker"/>
+                <column id="timezone"/>
+                <column id="active"/>
+                <column id="pdiSubDir"
+                        caption="msg://pdiSubDir"/>
+                <column id="pdiParameter"
+                        caption="msg://pdiParameter"
+                        maxTextLength="10"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="projectsTable.create"/>
+                <button id="editBtn" action="projectsTable.edit"/>
+                <button id="copyBtn"
+                        action="projectsTable.copy"
+                        caption="msg://copyCaption"
+                        icon="COPY"/>
+                <button id="removeBtn" action="projectsTable.remove"/>
+                <button id="refreshBtn" action="projectsTable.refresh"/>
+                <button id="exportCsvBtn"
+                        action="projectsTable.exportCsv"
+                        caption="msg://exportCsvCaption"
+                        icon="DOWNLOAD"/>
+                <upload id="importCsvUpload"
+                        uploadButtonCaption="msg://importCsvCaption"
+                        fileStoragePutMode="MANUAL"
+                        uploadButtonIcon="UPLOAD"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

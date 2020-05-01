@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://schemas.haulmont.com/cuba/rest-services-v2.xsd">
+    <service name="pdischeduler_WebhookService">
+        <method name="parseServer" anonymousAllowed="true">
+            <param name="triggerName"/>
+            <param name="object"/>
+            <param name="master"/>
+            <param name="log"/>
+            <param name="headers"/>
+            <param name="ip"/>
+            <param name="context"/>
+            <param name="user"/>
+            <param name="installationId"/>
+        </method>
+    </service>
+</services>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://displayCaption"
+        focusComponent="form"
+        messagesPack="com.mschneider.pdischeduler.web.screens.project">
+    <data>
+        <instance id="projectDc"
+                  class="com.mschneider.pdischeduler.entity.Project"
+                  view="project-view">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="projectDc" editable="false">
+                <column width="600px">
+                    <textField id="nameField" property="name"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
+                    <textField id="groupAccessField" property="groupAccess"/>
+                    <textField id="pdiSubDirField" property="pdiSubDir" caption="msg://pdiSubDir"/>
+                    <textField id="dataSubDirField" property="dataSubDir" caption="msg://dataSubDir"/>
+                    <textField id="pdiParameterField" property="pdiParameter" caption="msg://pdiParameter"/>
+                    <textField id="timezoneField" property="timezone"/>
+                    <textField id="mailReceiverInfoField" property="mailReceiverInfo"/>
+                    <textField id="mailReceiverErrorField" property="mailReceiverError"/>
+                    <textField id="cleanupAfterDaysField" property="cleanupAfterDays"/>
+
+                    <textField id="workerField" property="worker" caption="msg://workerName"/>
+                    <textField id="workerUrlField" property="worker.url" caption="msg://workerUrl"/>
+                    <textField id="workerTiemzoneField" property="worker.timezone" caption="msg://workerTimezone"/>
+                    <textField id="workerTypeField" property="worker.workerType" caption="msg://workerType"/>
+                    <textField id="workerPdiRootField" property="worker.pdiRootDir" caption="msg://workerPdiRootDir"/>
+                    <textField id="workerDateRootField" property="worker.dataRootDir" caption="msg://workerDataRootDir"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowClose" caption="msg://closeButtonCaption"/>
+        </hbox>
+    </layout>
+</window>

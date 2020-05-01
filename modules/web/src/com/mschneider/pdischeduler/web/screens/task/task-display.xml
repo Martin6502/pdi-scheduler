@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://displayCaption"
+        focusComponent="form"
+        messagesPack="com.mschneider.pdischeduler.web.screens.task">
+    <data>
+        <instance id="taskDc"
+                  class="com.mschneider.pdischeduler.entity.Task"
+                  view="task-view">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="taskDc" editable="false">
+                <column width="600px">
+                    <label id="headline" stylename="bold"/>
+                    <textField id="nameField" property="name"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
+                    <textField id="pdiFileField" property="pdiFile" caption="msg://pdiFile"/>
+                    <textField id="pdiParameterField" property="pdiParameter" caption="msg://pdiParameter"/>
+                    <textField id="logLevelField" property="logLevel"/>
+                    <textField id="sortKeyField" property="sortKey"/>
+                    <lookupField id="triggerTypeField" property="triggerType"/>
+                    <textField id="cronSpecField" property="cronSpec"/>
+                    <textField id="cronExclDatesField" property="cronExclDates"/>
+                    <textField id="prevTaskField" property="prevTask"/>
+                    <textField id="timeoutSecField" property="timeoutSec"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowClose" caption="msg://closeButtonCaption"/>
+        </hbox>
+    </layout>
+</window>

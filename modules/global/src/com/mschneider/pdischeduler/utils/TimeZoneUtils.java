@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeZoneUtils {
 
-    public static Map<String, Object> getLookupList() {
-        Map<String, Object> map = new LinkedHashMap<>();
+    public static Map<String, String> getLookupList() {
+        Map<String, String> map = new LinkedHashMap<>();
         String[] ids = TimeZone.getAvailableIDs();
         for (String id : ids) {
             map.put(displayTimeZone(TimeZone.getTimeZone(id)), id);

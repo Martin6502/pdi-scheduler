@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="scrollBox"
+        messagesPack="com.mschneider.pdischeduler.web.screens.project">
+    <data>
+        <instance id="projectDc"
+                  class="com.mschneider.pdischeduler.entity.Project"
+                  view="project-view">
+            <loader/>
+        </instance>
+        <collection id="workersLookupDc" class="com.mschneider.pdischeduler.entity.Worker" view="worker-lookup">
+            <loader id="workersLookupDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Worker e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <vbox margin="true"
+                  spacing="true">
+                <textField id="name"
+                           caption="Project name"
+                           datatype="string"
+                           dataContainer="projectDc"
+                           property="name"
+                           required="true"
+                           width="100%"/>
+                <textArea id="description"
+                          caption="Project description"
+                          dataContainer="projectDc"
+                          property="description"
+                          rows="3"
+                          width="100%"/>
+                <textField id="dataSubDir"
+                           caption="msg://dataSubDir"
+                           contextHelpText="msg://dataSubDirDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="dataSubDir"
+                           width="100%"/>
+                <textField id="pdiSubDir"
+                           caption="msg://pdiSubDir"
+                           contextHelpText="msg://pdiSubDirDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="pdiSubDir"
+                           width="100%"/>
+                <textField id="pdiParameter"
+                           caption="msg://pdiParameter"
+                           contextHelpText="msg://pdiParameterDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="pdiParameter"
+                           width="100%"/>
+                <textField id="groupAccess"
+                           caption="Access group"
+                           contextHelpText="msg://groupAccessDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="groupAccess"
+                           required="true"
+                           width="100%"/>
+                <lookupPickerField caption="Assigned Worker"
+                                   dataContainer="projectDc"
+                                   optionsContainer="workersLookupDc"
+                                   property="worker"
+                                   required="true"
+                                   width="400px"/>
+                <lookupField id="timezoneLookup"
+                             caption="Project timezone"
+                             dataContainer="projectDc"
+                             property="timezone"
+                             required="true"
+                             width="400px"/>
+                <textField id="mailReceiverInfo"
+                           caption="EMail receiver for success"
+                           contextHelpText="msg://mailReceiverInfoDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="mailReceiverInfo"
+                           width="100%"/>
+                <textField id="mailReceiverError"
+                           caption="EMail receiver for error"
+                           contextHelpText="msg://mailReceiverErrorDesc"
+                           dataContainer="projectDc"
+                           datatype="string"
+                           property="mailReceiverError"
+                           width="100%"/>
+                <textField id="cleanupAfterDays"
+                           caption="Cleanup Results after days"
+                           dataContainer="projectDc"
+                           datatype="int"
+                           property="cleanupAfterDays"
+                           width="100%"/>
+                <checkBox id="active"
+                          caption="Active "
+                          dataContainer="projectDc"
+                          property="active"/>
+            </vbox>
+            <!--
+            <form id="form" dataContainer="projectDc">
+                <column width="250px">
+                    <textField id="nameField" property="name"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
+                    <textField id="groupAccessField" property="groupAccess"/>
+                    <textField id="pdiSubDirField" property="pdiSubDir"/>
+                    <textField id="dataSubDirField" property="dataSubDir"/>
+                    <textField id="pdiParameterField" property="pdiParameter"/>
+                    <checkBox id="activeField" property="active"/>
+                    <textField id="timezoneField" property="timezone"/>
+                    <textField id="mailReceiverInfoField" property="mailReceiverInfo"/>
+                    <textField id="mailReceiverErrorField" property="mailReceiverError"/>
+                    <textField id="cleanupAfterDaysField" property="cleanupAfterDays"/>
+                </column>
+            </form>
+            -->
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

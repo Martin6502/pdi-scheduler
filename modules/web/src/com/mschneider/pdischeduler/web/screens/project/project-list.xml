@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://listCaption"
+        focusComponent="projectsTable"
+        messagesPack="com.mschneider.pdischeduler.web.screens.project">
+    <data readOnly="true">
+        <collection id="projectsDc"
+                    class="com.mschneider.pdischeduler.entity.Project"
+                    view="project-view">
+            <loader id="projectsDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Project e
+where e.worker.active = TRUE order by e.name]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="projectsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="projectsTable"
+                dataLoader="projectsDl">
+            <properties include="(name|description|pdiSubDir|dataSubDir|pdiParameter)"/>
+        </filter>
+        <table id="projectsTable"
+               width="100%"
+               dataContainer="projectsDc">
+            <actions>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="description"
+                        maxTextLength="50"/>
+                <column id="timezone"/>
+                <column id="active"/>
+                <column id="pdiSubDir"
+                        caption="msg://pdiSubDir"/>
+                <column id="pdiParameter"
+                        caption="msg://pdiParameter"
+                        maxTextLength="10"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="taskmonitorBtn"
+                        action="projectsTable.taskmonitor"
+                        caption="msg://taskmonitorCaption"
+                        icon="BULK_EDIT_ACTION"/>
+                <button id="taskbrowseBtn"
+                        action="projectsTable.taskbrowse"
+                        caption="msg://taskbrowseCaption"
+                        icon="EDIT_ACTION"/>
+                <button id="taskrunmonitorBtn"
+                        action="projectsTable.taskrunmonitor"
+                        caption="msg://taskrunmonitorCaption"
+                        icon="LIST"/>
+                <button id="projectDisplayBtn"
+                        action="projectsTable.projectdisplay"
+                        caption="msg://projectDisplayCaption"
+                        icon="EYE"/>
+                <button id="refreshBtn" action="projectsTable.refresh"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

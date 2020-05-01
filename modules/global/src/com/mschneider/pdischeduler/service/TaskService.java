@@ -34,6 +34,8 @@ public interface TaskService {
 
     void taskExec(String taskUUID, TaskRunStartTrigger triggerType, boolean forceExec);
 
+    void taskStop(String taskUUID);
+
     boolean isValidCronSpec(String str);
 
     Date getNextDate(String timezone, String cronSpec, String cronExclDates);

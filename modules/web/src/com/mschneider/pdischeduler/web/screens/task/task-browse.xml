@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="tasksTable"
+        messagesPack="com.mschneider.pdischeduler.web.screens.task">
+    <data readOnly="true">
+        <collection id="tasksDc"
+                    class="com.mschneider.pdischeduler.entity.Task"
+                    view="task-view">
+            <loader id="tasksDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Task e
+where e.project.id = :currProjectId
+order by e.sortKey, e.name]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tasksTable"
+            spacing="true">
+        <label id="headline" stylename="bold" />
+        <filter id="filter"
+                applyTo="tasksTable"
+                dataLoader="tasksDl">
+            <properties include=".*"/>
+        </filter>
+        <table id="tasksTable"
+               width="100%"
+               dataContainer="tasksDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create">
+                </action>
+                <action id="edit" type="edit">
+                </action>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="sortKey"/>
+                <column id="name"/>
+                <column id="description"
+                        maxTextLength="20"/>
+                <column id="pdiFile"
+                        caption="msg://pdiFile"/>
+                <column id="pdiParameter"
+                        caption="msg://pdiParameter"
+                        maxTextLength="10"/>
+                <column id="triggerType"/>
+                <column id="cronSpec"/>
+                <column id="cronExclDates"
+                        maxTextLength="12"/>
+                <column id="prevTask"/>
+                <column id="active"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="tasksTable.create"/>
+                <button id="editBtn" action="tasksTable.edit"/>
+                <button id="copyBtn"
+                        action="tasksTable.copy"
+                        caption="msg://copyCaption"
+                        icon="COPY"/>
+                <button id="removeBtn" action="tasksTable.remove"/>
+                <button id="refreshBtn" action="tasksTable.refresh"/>
+                <button id="exportCsvBtn"
+                        action="tasksTable.exportCsv"
+                        caption="msg://exportCsvCaption"
+                        icon="DOWNLOAD"/>
+                <upload id="importCsvUpload"
+                        uploadButtonCaption="msg://importCsvCaption"
+                        fileStoragePutMode="MANUAL"
+                        uploadButtonIcon="UPLOAD"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -24,8 +24,12 @@ import com.haulmont.cuba.gui.components.Formatter;
 import com.mschneider.pdischeduler.utils.TimeZoneUtils;
 
 import java.util.Date;
+import java.util.function.Function;
 
 public class DateTimezoneFormatter implements Formatter<Date> {
+
+    // Function<? super Object, String> formatter
+    // public void setFormatter(Function<? super Object, String> formatter) {
 
     private final String timezone;
 
@@ -43,3 +47,4 @@ public class DateTimezoneFormatter implements Formatter<Date> {
     }
 
 }
+

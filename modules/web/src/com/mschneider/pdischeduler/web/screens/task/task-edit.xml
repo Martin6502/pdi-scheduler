@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="scrollBox"
+        messagesPack="com.mschneider.pdischeduler.web.screens.task">
+    <data>
+        <instance id="taskDc"
+                  class="com.mschneider.pdischeduler.entity.Task"
+                  view="task-view">
+            <loader/>
+        </instance>
+        <collection id="projectLookupDc" class="com.mschneider.pdischeduler.entity.Project" view="_minimal">
+            <loader id="projectLookupDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Project e
+where e.id = :currProjectId order by e.name]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="prevtaskLookupDc" class="com.mschneider.pdischeduler.entity.Task" view="_minimal">
+            <loader id="prevtaskLookupDl">
+                <query>
+                    <![CDATA[select e from pdischeduler$Task e
+where e.project.id = :currProjectId order by e.sortKey, e.name]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <vbox margin="true"
+                  spacing="true">
+                <lookupField id="projectLookup"
+                             caption="Project"
+                             dataContainer="taskDc"
+                             editable="false"
+                             optionsContainer="projectLookupDc"
+                             property="project"
+                             required="true"
+                             width="300px"/>
+                <textField id="name"
+                           caption="Task name"
+                           dataContainer="taskDc"
+                           datatype="string"
+                           property="name"
+                           required="true"
+                           width="100%"/>
+                <textArea id="description"
+                          caption="Task description"
+                          dataContainer="taskDc"
+                          property="description"
+                          rows="3"
+                          width="100%"/>
+                <textField id="pdifile"
+                           caption="PDI file"
+                           contextHelpText="Path and name of .kjb file"
+                           dataContainer="taskDc"
+                           datatype="string"
+                           property="pdiFile"
+                           required="true"
+                           width="100%"/>
+                <textField id="pdiParameter"
+                           caption="msg://pdiParameter"
+                           contextHelpText="msg://pdiParameterDesc"
+                           dataContainer="taskDc"
+                           datatype="string"
+                           property="pdiParameter"
+                           width="100%"/>
+                <lookupField id="logLevelLookup"
+                             caption="Log Level"
+                             dataContainer="taskDc"
+                             property="logLevel"
+                             required="true"
+                             width="300px"/>
+                <textField id="timeoutsec"
+                           caption="Timeout sec"
+                           dataContainer="taskDc"
+                           datatype="int"
+                           property="timeoutSec"
+                           required="true"
+                           width="300px"/>
+                <textField id="sortkey"
+                           caption="Sort key"
+                           dataContainer="taskDc"
+                           datatype="int"
+                           property="sortKey"
+                           required="true"
+                           width="300px"/>
+                <lookupField id="triggerTypeLookup"
+                             caption="Trigger type"
+                             dataContainer="taskDc"
+                             nullOptionVisible="false"
+                             property="triggerType"
+                             width="300px"/>
+                <vbox id="trigger_type_cron"
+                      spacing="true">
+                    <textField id="cronspec"
+                               caption="Cron specification"
+                               contextHelpText="msg://cronspecCaption"
+                               dataContainer="taskDc"
+                               datatype="string"
+                               property="cronSpec"
+                               width="100%">
+                        <validator class="com.mschneider.pdischeduler.web.CronSpecValidator"/>
+                    </textField>
+                    <textField id="cronexcldates"
+                               caption="Cron exclude dates"
+                               contextHelpText="msg://cronexcldatesCaption"
+                               dataContainer="taskDc"
+                               datatype="string"
+                               property="cronExclDates"
+                               width="100%">
+                        <validator class="com.mschneider.pdischeduler.web.CronExclValidator"/>
+                    </textField>
+                </vbox>
+                <vbox id="trigger_type_prev"
+                      spacing="true">
+                    <lookupField id="prevTaskLookup"
+                                 caption="Previous Task"
+                                 dataContainer="taskDc"
+                                 optionsContainer="prevtaskLookupDc"
+                                 property="prevTask"
+                                 width="300px"/>
+                </vbox>
+                <checkBox id="active"
+                          caption="Active"
+                          dataContainer="taskDc"
+                          property="active"/>
+            </vbox>
+
+            <!--
+            <form id="form" dataContainer="taskDc">
+                <column width="250px">
+                    <pickerField id="projectField" property="project">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <textField id="nameField" property="name"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
+                    <checkBox id="activeField" property="active"/>
+                    <textField id="pdiFileField" property="pdiFile"/>
+                    <textField id="pdiParameterField" property="pdiParameter"/>
+                    <textField id="logLevelField" property="logLevel"/>
+                    <textField id="sortKeyField" property="sortKey"/>
+                    <lookupField id="triggerTypeField" property="triggerType"/>
+                    <textField id="cronSpecField" property="cronSpec"/>
+                    <textField id="cronExclDatesField" property="cronExclDates"/>
+                    <pickerField id="prevTaskField" property="prevTask">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <textField id="timeoutSecField" property="timeoutSec"/>
+                </column>
+            </form>
+            -->
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

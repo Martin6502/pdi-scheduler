@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="scrollBox"
+        messagesPack="com.mschneider.pdischeduler.web.screens.worker">
+    <data>
+        <instance id="workerDc"
+                  class="com.mschneider.pdischeduler.entity.Worker"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+             <vbox margin="true"
+                  spacing="true">
+                <textField id="name"
+                           caption="Worker name"
+                           datatype="string"
+                           dataContainer="workerDc"
+                           property="name"
+                           required="true"
+                           width="100%"/>
+                <textArea id="description"
+                          caption="Worker description"
+                          dataContainer="workerDc"
+                          property="description"
+                          rows="3"
+                          width="100%"/>
+                <textField id="url"
+                           caption="Worker URL"
+                           datatype="string"
+                           contextHelpText="msg://workerUrlDesc"
+                           dataContainer="workerDc"
+                           property="url"
+                           required="true"
+                           width="100%"/>
+                <hbox id="credentialBox"
+                      expand="button_pass1"
+                      spacing="true"
+                      width="520px">
+                    <textField id="userid"
+                               align="BOTTOM_LEFT"
+                               caption="Worker Userid"
+                               datatype="string"
+                               dataContainer="workerDc"
+                               property="userid"
+                               required="true"
+                               width="200px"/>
+                    <passwordField id="password"
+                                   align="BOTTOM_LEFT"
+                                   caption="Password"
+                                   dataContainer="workerDc"
+                                   property="password"
+                                   required="true"
+                                   width="200px"/>
+                    <button id="button_pass1"
+                            align="BOTTOM_LEFT"
+                            caption="Show value"
+                            invoke="showPassword"/>
+                </hbox>
+                <lookupField id="timezoneLookup"
+                             caption="Worker Timezone "
+                             nullOptionVisible="false"
+                             dataContainer="workerDc"
+                             property="timezone"
+                             required="true"
+                             width="300px"/>
+                <textField id="DataRootDir"
+                           caption="Data Root Directory"
+                           datatype="string"
+                           dataContainer="workerDc"
+                           property="dataRootDir"
+                           required="true"
+                           width="100%"/>
+                <lookupField id="workerTypeLookup"
+                             caption="Worker Type"
+                             nullOptionVisible="false"
+                             dataContainer="workerDc"
+                             property="workerType"
+                             required="true"
+                             width="300px"/>
+                <vbox id="worker_type_0">
+                    <textField id="PdiRootDir"
+                               caption="PDI Root Directory"
+                               datatype="string"
+                               dataContainer="workerDc"
+                               property="pdiRootDir"
+                               width="100%"/>
+                </vbox>
+                <vbox id="worker_type_1"
+                      spacing="true">
+                    <textField id="pdiReposId"
+                               caption="PDI Repository Name"
+                               datatype="string"
+                               dataContainer="workerDc"
+                               property="pdiReposId"
+                               width="100%"/>
+                    <hbox id="reposCredentialBox"
+                          expand="button_pass2"
+                          spacing="true"
+                          width="520px">
+                        <textField id="pdiReposUser"
+                                   align="BOTTOM_LEFT"
+                                   caption="PDI Repository  User"
+                                   datatype="string"
+                                   dataContainer="workerDc"
+                                   property="pdiReposUser"
+                                   width="200px"/>
+                        <passwordField id="pdiReposPassword"
+                                       align="BOTTOM_LEFT"
+                                       caption="PDI Repository Password"
+                                       dataContainer="workerDc"
+                                       property="pdiReposPassword"
+                                       width="200px"/>
+                        <button id="button_pass2"
+                                align="BOTTOM_LEFT"
+                                caption="Show value"
+                                invoke="showPasswordRepos"/>
+                    </hbox>
+                </vbox>
+                <checkBox id="active"
+                          caption="Active"
+                          dataContainer="workerDc"
+                          property="active"/>
+            </vbox>
+            <!--
+            <form id="form" dataContainer="workerDc">
+                <column width="250px">
+                    <textField id="nameField" property="name"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
+                    <checkBox id="activeField" property="active"/>
+                    <textField id="urlField" property="url"/>
+                    <textField id="useridField" property="userid"/>
+                    <textField id="passwordEncrField" property="passwordEncr"/>
+                    <textField id="timezoneField" property="timezone"/>
+                    <textField id="dataRootDirField" property="dataRootDir"/>
+                    <lookupField id="workerTypeField" property="workerType"/>
+                    <textField id="pdiRootDirField" property="pdiRootDir"/>
+                    <textField id="pdiReposIdField" property="pdiReposId"/>
+                    <textField id="pdiReposUserField" property="pdiReposUser"/>
+                    <textField id="pdiReposPasswordEncrField" property="pdiReposPasswordEncr"/>
+                </column>
+            </form>
+            -->
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

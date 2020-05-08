@@ -29,7 +29,7 @@
           </list>
         </option>
         <option name="artifactGroup" value="com.mschneider.pdischeduler" />
-        <option name="artifactVersion" value="1.3.0" />
+        <option name="artifactVersion" value="1.3.1" />
         <option name="tomcatDir" value="D:\Develop\CubaStudioProjects\pdi-scheduler/deploy/tomcat" />
         <option name="tomcatPort" value="8950" />
         <option name="tomcatShutdownPort" value="8955" />

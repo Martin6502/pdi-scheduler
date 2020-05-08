@@ -32,7 +32,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.mschneider.pdischeduler'
-        version = '1.3.0'
+        version = '1.3.1'
         isSnapshot = false
     }
     tomcat {
@@ -106,29 +106,29 @@ configure(coreModule) {
         jdbc(postgres)
         testRuntime(postgres)
 
+        // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
+        compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+        
+        // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
+        compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: '2.3.2'
+        
+        // https://mvnrepository.com/artifact/com.mchange/c3p0
+        compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.5'
+
         // https://mvnrepository.com/artifact/commons-io/commons-io
         compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
-        // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-        compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
-        
-        // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
-        compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: '2.3.0'
-        
+        // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+        compile group: 'org.apache.commons', name: 'commons-csv', version: '1.8'
+
         // https://mvnrepository.com/artifact/log4j/log4j
-        compile group: 'log4j', name: 'log4j', version: '1.2.17'
-        
+        // compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        
+        // compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
-        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
-        
-        // https://mvnrepository.com/artifact/com.mchange/c3p0
-        compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
-        compile('org.apache.commons:commons-csv:1.5')
-        // compile('org.quartz-scheduler:quartz:2.3.0')
-        // compile('org.quartz-scheduler:quartz-jobs:2.3.0')
+        // compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
 
     }
 

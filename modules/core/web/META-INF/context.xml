@@ -7,7 +7,7 @@
               name="jdbc/CubaDS"
               password="oJdMkf8vIlmA3aZYiRh1"
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://127.0.0.1/pdischeduler?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;sslmode=verify-ca"
+              url="jdbc:postgresql://127.0.0.1/pdischeduler?ssl=false"
               username="pdischeduler"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>

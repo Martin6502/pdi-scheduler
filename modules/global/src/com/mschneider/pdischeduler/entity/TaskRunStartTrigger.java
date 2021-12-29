@@ -30,7 +30,8 @@ public enum TaskRunStartTrigger implements EnumClass<Integer> {
     cron(0),
     prevTask(1),
     manualSeq(2),
-    manualSingle(3);
+    manualSingle(3),
+    event(4);
 
     private final Integer id;
 

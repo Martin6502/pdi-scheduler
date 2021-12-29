@@ -48,6 +48,7 @@ public class AppLifecycle implements AppContext.Listener {
         logger.info("PDI_Scheduler application started");
         try {
             // Grab the Scheduler instance from the Factory
+            System.setProperty("org.quartz.properties", "com/mschneider/pdischeduler/quartz.properties");
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
             logger.info("Quartz scheduler started");

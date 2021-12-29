@@ -9,7 +9,8 @@ https://wiki.pentaho.com/display/EAI/Carte+Configuration
 https://www.postgresql.org/docs/current/static/tutorial-install.html
 
 * Tomcat Installation\
-https://tomcat.apache.org/download-80.cgi
+https://tomcat.apache.org/download-80.cgi 
+
 
 ## Deployment at Tomcat Server
 For making installation easy a pdischeduler.war file is provided here for download. It is located at install directory.
@@ -63,7 +64,7 @@ After installation you have to set Postgres DB credentials during startup
          #
          # Within pdischeduler.war a generic context.xml is packaged which contains variables for Postgres DB connection:
          # Please set for your needs
-         export CATALINA_OPTS="$CATALINA_OPTS -Dpg.url='jdbc:postgresql://<servername>/<username>?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory' -Dpg.user=<username> -Dpg.pass=<password>"
+         export CATALINA_OPTS="$CATALINA_OPTS -Dpg.url='jdbc:postgresql://<servername>/<username>?ssl=true&sslmode=require&sslfactory=org.postgresql.ssl.NonValidatingFactory' -Dpg.user=<username> -Dpg.pass=<password>"
 
 Now copy war file to webapps
 
@@ -84,6 +85,8 @@ After startup the application should be available at
     http://<server>:8080/pdischeduler/
 
 For first login use user "admin" with password "admin". Please change this!
+
+Note: I've also tested with Tomcat 9 and it works fine!
 
 ### Base Configuration from inside the application
 

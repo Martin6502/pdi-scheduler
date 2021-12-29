@@ -7,5 +7,6 @@
         <class>com.mschneider.pdischeduler.entity.Project</class>
         <class>com.mschneider.pdischeduler.entity.Task</class>
         <class>com.mschneider.pdischeduler.entity.TaskRun</class>
+        <class>com.mschneider.pdischeduler.entity.TaskTriggerEvent</class>
     </persistence-unit>
 </persistence>

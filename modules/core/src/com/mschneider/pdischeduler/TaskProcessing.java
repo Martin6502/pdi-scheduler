@@ -319,6 +319,7 @@ public class TaskProcessing {
                 */
                 String lastLogLine = null;
                 String resultDateStr = null;
+                String resultStartDateStr = null;
                 if (logText != null) {
                     boolean copyHTML = false;
                     boolean logCleanTruncated = false;
@@ -348,6 +349,8 @@ public class TaskProcessing {
                             resultCode = lineContent.substring(16);
                         } else if (lineContent.startsWith("@@@@@ResultDate=")) {
                             resultDateStr = lineContent.substring(16);
+                        } else if (lineContent.startsWith("@@@@@ResultStartDate=")) {
+                            resultStartDateStr = lineContent.substring(21);
                         } else {
                             if (line.startsWith("20")) {
                                 lastLogLine = line;
@@ -371,8 +374,12 @@ public class TaskProcessing {
                 }
                 taskRun.setResultCode(resultCode);
 
-                ZonedDateTime logLastZDT = scanDate(lastLogLine, taskRun.getTask().getProject().getWorker().getTimezone());
-                if (logLastZDT == null && resultDateStr != null) {
+                if (resultStartDateStr != null) {
+                    // use new ResultStartDate parameter to overcome PDI 9.2 problem with changed jobstatus_log_date content
+                    logStartZDT = scanDate(resultStartDateStr, taskRun.getTask().getProject().getWorker().getTimezone());
+                }
+                ZonedDateTime logLastZDT = null;
+                if (resultDateStr != null) {
                     logLastZDT = scanDate(resultDateStr, taskRun.getTask().getProject().getWorker().getTimezone());
                 }
 

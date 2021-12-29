@@ -17,7 +17,7 @@
                        value="com.mschneider.pdischeduler.service.ExportImportProjectService"/>
                 <entry key="pdischeduler_ExportImportTaskService"
                        value="com.mschneider.pdischeduler.service.ExportImportTaskService"/>
-                <entry key="pdischeduler_WebhookService" value="com.mschneider.pdischeduler.service.WebhookService"/>
+                <entry key="pdiControl" value="com.mschneider.pdischeduler.service.WebhookService"/>
             </map>
         </property>
     </bean>

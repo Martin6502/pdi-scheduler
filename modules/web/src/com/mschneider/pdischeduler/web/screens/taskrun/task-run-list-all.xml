@@ -33,6 +33,8 @@ order by e.startTime desc]]>
                 applyTo="taskRunsTable"
                 dataLoader="taskRunsDl">
             <properties include="(startTime|stopTime|durationSec|logText|resultCode|resultHTML|startTrigger|status)"/>
+            <property name="task.name" caption="msg://Task.name"/>
+            <property name="task.project.name" caption="msg://Project.name"/>
         </filter>
         <table id="taskRunsTable"
                width="100%"

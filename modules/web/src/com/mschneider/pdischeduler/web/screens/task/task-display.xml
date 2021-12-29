@@ -30,6 +30,9 @@
                     <textField id="cronExclDatesField" property="cronExclDates"/>
                     <textField id="prevTaskField" property="prevTask"/>
                     <textField id="timeoutSecField" property="timeoutSec"/>
+                    <textField id="wsTriggerNameField" property="wsTriggerName"/>
+                    <textField id="wsTriggerSecretKeyField" property="wsTriggerSecretKey"/>
+                    <textField id="wsTriggerRestartTimeField" property="wsTriggerRestartTime"/>
                 </column>
             </form>
         </scrollBox>

@@ -77,7 +77,10 @@ public class ExportImportTaskServiceBean implements ExportImportTaskService {
                     "cronSpec",
                     "cronExclDates",
                     "prevTaskName",
-                    "active"
+                    "active",
+                    "wsTriggerName",
+                    "wsTriggerSecretKey",
+                    "wsTriggerRestartTime"
             ));
             for (Task task : tasks) {
                 csvPrinter.printRecord(
@@ -93,7 +96,10 @@ public class ExportImportTaskServiceBean implements ExportImportTaskService {
                         task.getCronSpec(),
                         task.getCronExclDates(),
                         task.getPrevTask() != null ? task.getPrevTask().getName() : null,
-                        task.getActive()
+                        task.getActive(),
+                        task.getWsTriggerName(),
+                        task.getWsTriggerSecretKey(),
+                        task.getWsTriggerRestartTime()
                 );
             }
             csvPrinter.flush();
@@ -151,6 +157,16 @@ public class ExportImportTaskServiceBean implements ExportImportTaskService {
                         task.setTimeoutSec(i);
                     } catch (NumberFormatException e) {
                         logger.debug("importTasksFromCsv: timeoutSec not a number");
+                    }
+
+                    task.setWsTriggerName(record.get("wsTriggerName"));
+                    task.setWsTriggerSecretKey(record.get("wsTriggerSecretKey"));
+
+                    try {
+                        int i = Integer.parseInt(record.get("wsTriggerRestartTime"));
+                        task.setWsTriggerRestartTime(i);
+                    } catch (NumberFormatException e) {
+                        logger.debug("importTasksFromCsv: wsTriggerRestartTime not a number");
                     }
 
                     // save entries with prevTaskName for second pass (don't know about sequence)

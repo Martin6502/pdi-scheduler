@@ -1,0 +1,7 @@
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column VERSION__U21106 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column CREATE_TS__U47071 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column CREATED_BY__U97107 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column UPDATE_TS__U90022 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column UPDATED_BY__U79408 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column DELETE_TS__U84268 cascade ;
+alter table PDISCHEDULER_TASK_TRIGGER_EVENT drop column DELETED_BY__U44681 cascade ;

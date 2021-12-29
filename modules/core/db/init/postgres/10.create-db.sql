@@ -77,6 +77,9 @@ create table PDISCHEDULER_TASK (
     CRON_EXCL_DATES varchar(255),
     PREV_TASK_ID uuid,
     TIMEOUT_SEC integer,
+    WS_TRIGGER_NAME varchar(255),
+    WS_TRIGGER_SECRET_KEY varchar(255),
+    WS_TRIGGER_RESTART_TIME integer,
     --
     primary key (ID)
 )^
@@ -102,3 +105,14 @@ create table PDISCHEDULER_TASK_RUN (
     primary key (ID)
 )^
 -- end PDISCHEDULER_TASK_RUN
+-- begin PDISCHEDULER_TASK_TRIGGER_EVENT
+create table PDISCHEDULER_TASK_TRIGGER_EVENT (
+    ID uuid,
+    --
+    RECEIVED timestamp not null,
+    TASK_ID uuid not null,
+    EXTERNAL_REFERENCE varchar(255),
+    --
+    primary key (ID)
+)^
+-- end PDISCHEDULER_TASK_TRIGGER_EVENT

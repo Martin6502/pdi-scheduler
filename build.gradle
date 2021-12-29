@@ -1,8 +1,7 @@
-
 buildscript {
-    ext.cubaVersion = '7.2.4'
+    ext.cubaVersion = '7.2.17'
     repositories {
-        
+
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
@@ -10,7 +9,7 @@ buildscript {
                 password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
             }
         }
-        
+
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -32,7 +31,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.mschneider.pdischeduler'
-        version = '1.3.1'
+        version = '1.4.0'
         isSnapshot = false
     }
     tomcat {
@@ -46,11 +45,11 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent('com.haulmont.addon.restapi:restapi-global:7.2.0')
+    appComponent('com.haulmont.addon.restapi:restapi-global:7.2.3')
 
 }
 
-def postgres = 'org.postgresql:postgresql:42.2.9'
+def postgres = 'org.postgresql:postgresql:42.3.1'
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
@@ -74,10 +73,10 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 configure(globalModule) {
 
     dependencies {
-    if (!JavaVersion.current().isJava8()) {
-        runtime('javax.xml.bind:jaxb-api:2.3.1')
-        runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
-    }
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
     }
     entitiesEnhancing {
         main { enabled = true }
@@ -90,7 +89,7 @@ configure(globalModule) {
         }
     }
 
-    
+
 }
 
 configure(coreModule) {
@@ -108,18 +107,18 @@ configure(coreModule) {
 
         // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
         compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
-        
+
         // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
         compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: '2.3.2'
-        
+
         // https://mvnrepository.com/artifact/com.mchange/c3p0
         compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.5'
 
         // https://mvnrepository.com/artifact/commons-io/commons-io
-        compile group: 'commons-io', name: 'commons-io', version: '2.6'
+        compile group: 'commons-io', name: 'commons-io', version: '2.11.0'
 
         // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
-        compile group: 'org.apache.commons', name: 'commons-csv', version: '1.8'
+        compile group: 'org.apache.commons', name: 'commons-csv', version: '1.9.0'
 
         // https://mvnrepository.com/artifact/log4j/log4j
         // compile group: 'log4j', name: 'log4j', version: '1.2.17'
@@ -142,7 +141,7 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        connectionParams = '?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&sslmode=verify-ca'
+        connectionParams = '?ssl=false'
         dbms = 'postgres'
         host = '127.0.0.1'
         dbName = 'pdischeduler'
@@ -151,7 +150,7 @@ configure(coreModule) {
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        connectionParams = '?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&sslmode=verify-ca'
+        connectionParams = '?ssl=false'
         dbms = 'postgres'
         host = '127.0.0.1'
         dbName = 'pdischeduler'
@@ -183,7 +182,7 @@ configure(webModule) {
         compile(guiModule)
 
     }
-    
+
     task webArchive(type: Zip) {
         from file("$buildDir/web")
         from file('web')

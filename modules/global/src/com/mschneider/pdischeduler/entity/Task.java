@@ -43,7 +43,7 @@ public class Task extends StandardEntity {
 
     private static final long serialVersionUID = -3143011337817812768L;
 
-    private static final int TASK_TIMEOUT_DEFAULT = 3600;
+    private static final int TASK_TIMEOUT_DEFAULT = 600;
 
     @NotNull
     @OnDeleteInverse(DeletePolicy.DENY)
@@ -93,6 +93,15 @@ public class Task extends StandardEntity {
 
     @Column(name = "TIMEOUT_SEC")
     protected Integer timeoutSec = TASK_TIMEOUT_DEFAULT;
+
+    @Column(name = "WS_TRIGGER_NAME")
+    protected String wsTriggerName;
+
+    @Column(name = "WS_TRIGGER_SECRET_KEY")
+    protected String wsTriggerSecretKey;
+
+    @Column(name = "WS_TRIGGER_RESTART_TIME")
+    protected Integer wsTriggerRestartTime = 60;
 
     @Transient
     @MetaProperty
@@ -223,5 +232,27 @@ public class Task extends StandardEntity {
         return timeoutSec;
     }
 
+    public String getWsTriggerName() {
+        return wsTriggerName;
+    }
 
+    public void setWsTriggerName(String wsTriggerName) {
+        this.wsTriggerName = wsTriggerName;
+    }
+
+    public String getWsTriggerSecretKey() {
+        return wsTriggerSecretKey;
+    }
+
+    public void setWsTriggerSecretKey(String wsTriggerSecretKey) {
+        this.wsTriggerSecretKey = wsTriggerSecretKey;
+    }
+
+    public Integer getWsTriggerRestartTime() {
+        return wsTriggerRestartTime;
+    }
+
+    public void setWsTriggerRestartTime(Integer wsTriggerRestartTime) {
+        this.wsTriggerRestartTime = wsTriggerRestartTime;
+    }
 }
